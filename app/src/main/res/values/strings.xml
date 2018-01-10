@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Georgia Central</string>
+    <string name="title_activity_homepage">Homepage</string>
+    <string name="title_browse">Browse</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_search">Search</string>
+    <string name="title_chat">Messages</string>
+    <string name="title_post">Post</string>
 </resources>
