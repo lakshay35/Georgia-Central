@@ -98,6 +98,7 @@
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:background="#e60000"
+                android:onClick="onClickRegister"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:text="Register"
