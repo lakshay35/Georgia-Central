@@ -5,5 +5,8 @@
     <string name="title_profile">Profile</string>
     <string name="title_search">Search</string>
     <string name="title_chat">Messages</string>
-    <string name="title_post">Post</string>
+    <string name="title_sell">Sell</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
