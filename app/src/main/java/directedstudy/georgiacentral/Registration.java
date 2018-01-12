@@ -16,7 +16,7 @@ public class Registration extends AppCompatActivity {
     public void onClickSubmit(View View){
         Intent intent = new Intent(this, Navigator.class);
 
-        intent.putExtra("go", "go");
+        intent.putExtra("god", "god");
         startActivity(intent);
     }//onClickSubmit
 

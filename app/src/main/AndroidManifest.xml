@@ -20,7 +20,7 @@
             android:name=".Navigator"
             android:label="@string/title_activity_homepage"
             android:parentActivityName=".Login" />
-        <activity android:name=".Registration"></activity>
+        <activity android:name=".Registration" />
     </application>
 
 </manifest>
