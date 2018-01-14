@@ -1,6 +1,13 @@
 package directedstudy.georgiacentral;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
+import android.os.Handler;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -9,6 +16,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toolbar;
 
 public class Navigator extends AppCompatActivity {
     @NonNull
@@ -16,8 +24,10 @@ public class Navigator extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigator);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         setupNavigationBar();
     }
+
 
     protected void setupNavigationBar() {
         final BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -26,6 +36,7 @@ public class Navigator extends AppCompatActivity {
             // Set action to perform when any menu-item is selected.
             bottomNavigationView.setOnNavigationItemSelectedListener(
                     new BottomNavigationView.OnNavigationItemSelectedListener() {
+                        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                         @Override
                         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                             selectFragment(item, bottomNavigationView);
@@ -36,6 +47,7 @@ public class Navigator extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     protected void selectFragment(MenuItem item, BottomNavigationView bottomNavigationView) {
         item.setChecked(true);
         switch (item.getItemId()) {
@@ -46,13 +58,15 @@ public class Navigator extends AppCompatActivity {
                 pushFragment(new Browse());
                 break;
             case R.id.profile:
+                Toolbar toolbar = findViewById(R.id.edit);
+                setActionBar(toolbar);
                 pushFragment(new Profile());
                 break;
             case R.id.chat:
                 pushFragment(new Chat());
                 break;
             case R.id.sell:
-                pushFragment();
+                pushFragment(new Sell());
                 break;
         }
     }

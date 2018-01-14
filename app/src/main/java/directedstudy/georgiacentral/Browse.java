@@ -5,13 +5,30 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 
 public class Browse extends Fragment {
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActivity().setTitle("Browse Books");
+    }
+
+    protected void populateTable() {
+        TableLayout table = getActivity().findViewById(R.id.table);
+        String[] classes = {"AAEC 2580", "AAEC 2580E", "AAEC 2710", "AAEC 3010", "AAEC 3020E", "AAEC(ENVM) 3020", "AAEC 3040", "AAEC 3100", "AAEC 3200", "AAEC 3400", "AAEC 3580-3580L", "AAEC 3600", "AAEC 3690", "AAEC(ENVM) 3910", "AAEC 3911", "AAEC 3980"};
+        for(int i = 0; i < classes.length; i++) {
+            TextView view = new TextView(getActivity());
+            view.setText(classes[i]);
+            TableRow row = new TableRow(getActivity());
+            row.addView(view);
+            table.addView(row);
+        }
     }
 
     @Override
