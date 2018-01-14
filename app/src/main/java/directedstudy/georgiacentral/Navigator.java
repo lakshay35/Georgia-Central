@@ -1,5 +1,6 @@
 package directedstudy.georgiacentral;
 
+import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -19,7 +20,7 @@ public class Navigator extends AppCompatActivity {
     }
 
     protected void setupNavigationBar() {
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        final BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         if (bottomNavigationView != null) {
             pushFragment(new Browse());
             // Set action to perform when any menu-item is selected.
@@ -27,7 +28,7 @@ public class Navigator extends AppCompatActivity {
                     new BottomNavigationView.OnNavigationItemSelectedListener() {
                         @Override
                         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                            selectFragment(item);
+                            selectFragment(item, bottomNavigationView);
                             return false;
                         }
                     }
@@ -35,7 +36,7 @@ public class Navigator extends AppCompatActivity {
         }
     }
 
-    protected void selectFragment(MenuItem item) {
+    protected void selectFragment(MenuItem item, BottomNavigationView bottomNavigationView) {
         item.setChecked(true);
         switch (item.getItemId()) {
             case R.id.search:
@@ -46,6 +47,12 @@ public class Navigator extends AppCompatActivity {
                 break;
             case R.id.profile:
                 pushFragment(new Profile());
+                break;
+            case R.id.chat:
+                pushFragment(new Chat());
+                break;
+            case R.id.sell:
+                pushFragment();
                 break;
         }
     }
