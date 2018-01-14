@@ -1,43 +1,29 @@
 package directedstudy.georgiacentral;
 
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 
-public class Browse extends Fragment {
 
+public class Chat extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActivity().setTitle("Browse Books");
-    }
-
-    protected void populateTable() {
-        TableLayout table = getActivity().findViewById(R.id.table);
-        String[] classes = {"AAEC 2580", "AAEC 2580E", "AAEC 2710", "AAEC 3010", "AAEC 3020E", "AAEC(ENVM) 3020", "AAEC 3040", "AAEC 3100", "AAEC 3200", "AAEC 3400", "AAEC 3580-3580L", "AAEC 3600", "AAEC 3690", "AAEC(ENVM) 3910", "AAEC 3911", "AAEC 3980"};
-        for(int i = 0; i < classes.length; i++) {
-            TextView view = new TextView(getActivity());
-            view.setText(classes[i]);
-            TableRow row = new TableRow(getActivity());
-            row.addView(view);
-            table.addView(row);
-        }
+        getActivity().setTitle("Messages");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_browse, container, false);
+        return inflater.inflate(R.layout.fragment_chat, container, false);
     }
-
-//    // TODO: Rename parameter arguments, choose names that match
-//    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 //    private static final String ARG_PARAM1 = "param1";
 //    private static final String ARG_PARAM2 = "param2";
 //
@@ -47,7 +33,7 @@ public class Browse extends Fragment {
 //
 //    private OnFragmentInteractionListener mListener;
 //
-//    public Browse() {
+//    public Chat() {
 //        // Required empty public constructor
 //    }
 //
@@ -57,11 +43,11 @@ public class Browse extends Fragment {
 //     *
 //     * @param param1 Parameter 1.
 //     * @param param2 Parameter 2.
-//     * @return A new instance of fragment Browse.
+//     * @return A new instance of fragment Chat.
 //     */
 //    // TODO: Rename and change types and number of parameters
-//    public static Browse newInstance(String param1, String param2) {
-//        Browse fragment = new Browse();
+//    public static Chat newInstance(String param1, String param2) {
+//        Chat fragment = new Chat();
 //        Bundle args = new Bundle();
 //        args.putString(ARG_PARAM1, param1);
 //        args.putString(ARG_PARAM2, param2);
@@ -82,7 +68,7 @@ public class Browse extends Fragment {
 //    public View onCreateView(LayoutInflater inflater, ViewGroup container,
 //                             Bundle savedInstanceState) {
 //        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_browse, container, false);
+//        return inflater.inflate(R.layout.fragment_chat, container, false);
 //    }
 //
 //    // TODO: Rename method, update argument and hook method into UI event
