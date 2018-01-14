@@ -21,7 +21,6 @@ public class Login extends AppCompatActivity {
 
     public void onClickRegister(View view) {
         Intent intent = new Intent(this, Registration.class);
-
         intent.putExtra("go", "go");
         startActivity(intent);
     }//onClickRegister
