@@ -17,7 +17,14 @@ public class User {
         this.phoneNumber    = phoneNumber;
     }//User
 
+    public User(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }//User
+
     public User(String email, String password) {
+
         this.email = email;
         this.password = password;
     }//User

@@ -2,7 +2,10 @@ package directedstudy.georgiacentral;
 
 import directedstudy.georgiacentral.Objects.User;
 import directedstudy.georgiacentral.Tables.UserSchema;
+
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -34,6 +37,23 @@ public class Registration extends AppCompatActivity {
     }//onCreate
 
     public void onClickSubmit(View View){
+        final ProgressDialog mDialog = new ProgressDialog(this);;
+
+        mDialog.setMessage("Creating User please wait...");
+        mDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mDialog.setIndeterminate(true);
+        mDialog.setCanceledOnTouchOutside(false);
+        mDialog.show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                mDialog.dismiss();
+            }//run
+
+        }, 1000);
+
         User user = new User(etFirstName.getText().toString(), etLastName.getText().toString(), etEmail.getText().toString(), etPassword.getText().toString(), etPhoneNumber.getText().toString());
 
         if(etEmail.getText().toString().toLowerCase().indexOf("@uga.edu") == -1)
@@ -56,7 +76,6 @@ public class Registration extends AppCompatActivity {
     public void onClickCancel(View view){
         Intent intent = new Intent(this, Login.class);
 
-        intent.putExtra("go", "go");
         startActivity(intent);
     }//onClickCancel
 }

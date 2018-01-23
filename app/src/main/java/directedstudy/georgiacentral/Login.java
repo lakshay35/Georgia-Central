@@ -1,6 +1,8 @@
 package directedstudy.georgiacentral;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +29,23 @@ public class Login extends AppCompatActivity {
     }//onCreate
 
     public void onClickLogin(View view) {
+        final ProgressDialog mDialog = new ProgressDialog(this);;
+
+        mDialog.setMessage("Logging in. Please wait...");
+        mDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mDialog.setIndeterminate(true);
+        mDialog.setCanceledOnTouchOutside(false);
+        mDialog.show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                mDialog.dismiss();
+            }//run
+
+        }, 1000);
+
         String email    = etEmail.getText().toString();
         String password = etPassword.getText().toString();
 
@@ -41,13 +60,15 @@ public class Login extends AppCompatActivity {
             sessionManager.createLoginSession(dbUser.getFirstName()+dbUser.getLastName(), dbUser.getEmail());
 
             Intent intent = new Intent(this, Navigator.class);
+
             startActivity(intent);
         }else
             Toast.makeText(getApplicationContext(), "Login Error", Toast.LENGTH_LONG).show();
-    }//login
+    }//onClickLogin
 
     public void onClickRegister(View view) {
         Intent intent = new Intent(this, Registration.class);
+
         startActivity(intent);
     }//onClickRegister
 

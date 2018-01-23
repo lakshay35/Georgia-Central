@@ -54,7 +54,7 @@ public class UserSchema extends SQLiteOpenHelper{
         if(cursor != null && cursor.moveToFirst()&& cursor.getCount()>0){
             User logUser = new User(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
 
-            if(logUser.getEmail().equals(user.getEmail()) && logUser.getPassword().equals(user.getPassword())) {
+            if(logUser.getPassword().equals(user.getPassword())) {
                 return logUser;
             }//if
         }//if
@@ -83,5 +83,56 @@ public class UserSchema extends SQLiteOpenHelper{
         else
             return true;
     }//addUser
+
+    //untested function
+    public void updateUser(User user){
+        SQLiteDatabase db = getWritableDatabase();
+
+        String query = "UPDATE " + TABLE_USER + " SET " +
+                        COLUMN_FIRSTNAME + " = " + user.getFirstName() + ", " +
+                        COLUMN_LASTNAME + " = " + user.getLastName() + ", " +
+                        COLUMN_PASSWORD + " = " + user.getPassword() + ", " +
+                        COLUMN_PHONENUMBER + " = " + user.getPhoneNumber()  +
+                        " WHERE " + COLUMN_EMAIL + " = " + user.getEmail();
+
+        db.execSQL(query);
+
+        db.close();
+    }//updateUser
+
+    //untested function
+    public User retrieveUser(User user){
+        SQLiteDatabase db               = getReadableDatabase();
+        String query                    = "SELECT * FROM " + TABLE_USER + " WHERE " + COLUMN_EMAIL + " = ?";
+        Cursor cursor                   = db.rawQuery(query, new String [] {user.getEmail()});
+
+        if(cursor != null && cursor.moveToFirst()&& cursor.getCount()>0){
+            User retrieveUser = new User(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
+
+            return retrieveUser;
+        }//if
+
+        cursor.close();
+
+        return null;
+    }//retrieveUser
+
+    //untested function
+    public ArrayList<User> retrieveUsers(){
+        ArrayList<User> userList         = new ArrayList<User>();
+        SQLiteDatabase db                   = getReadableDatabase();
+        String query                        = "SELECT * FROM " + TABLE_USER;
+        Cursor cursor                       = db.rawQuery(query,null);
+
+        cursor.moveToFirst();
+        while (cursor.moveToNext()) {
+            User user = new User(cursor.getString(1), cursor.getString(2), cursor.getString(3));
+
+            userList.add(user);
+        }//while
+
+        cursor.close();
+        return userList;
+    }//retrieveUser
 
 }//class
