@@ -12,9 +12,9 @@ import directedstudy.georgiacentral.Tables.UserSchema;
 
 public class Login extends AppCompatActivity {
 
-    EditText etEmail;
-    EditText etPassword;
-    UserSchema userSchema;
+    private EditText etEmail;
+    private EditText etPassword;
+    private UserSchema userSchema;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +23,13 @@ public class Login extends AppCompatActivity {
 
         etEmail     = (EditText) findViewById(R.id.etEmail);
         etPassword  = (EditText) findViewById(R.id.etPassword);
-        userSchema  = new UserSchema(this, null, null, 1);;
+        userSchema  = new UserSchema(this);
     }//onCreate
 
     public void onClickLogin(View view) {
         String email    = etEmail.getText().toString();
         String password = etPassword.getText().toString();
+
         User user       = new User(email, password);
         User dbUser     = userSchema.logIn(user);
 

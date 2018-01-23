@@ -28,7 +28,7 @@ public class Registration extends AppCompatActivity {
         etEmail         = (EditText) findViewById(R.id.etEmail);
         etPassword      = (EditText) findViewById(R.id.etPassword);
         etPhoneNumber   = (EditText) findViewById(R.id.etPhoneNumber);
-        userSchema      = new UserSchema(this, null, null, 1);;
+        userSchema      = new UserSchema(this);
 
         setTitle("Register");
     }//onCreate
