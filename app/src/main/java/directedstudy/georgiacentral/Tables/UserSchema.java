@@ -10,7 +10,7 @@ import directedstudy.georgiacentral.Objects.User;
 
 public class UserSchema extends SQLiteOpenHelper{
     private static final int DATABASE_VERSION       = 1;
-    private static final String DATABASE_NAME       = "User.db";
+    private static final String DATABASE_NAME       = "BookDawg.db";
     public static final String TABLE_USER           = "User";
     public static final String COLUMN_USERID        = "userID";
     public static final String COLUMN_FIRSTNAME     = "firstName";
