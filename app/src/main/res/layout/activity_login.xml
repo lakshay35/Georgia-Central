@@ -35,19 +35,19 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tvEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="UGA Email"
                 android:textAlignment="center" />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:textAlignment="viewStart" />
+                android:textAlignment="center" />
         </LinearLayout>
 
         <LinearLayout
@@ -57,18 +57,19 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/tvPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Password"
                 android:textAlignment="center" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="textPassword"
+                android:textAlignment="center" />
         </LinearLayout>
 
         <LinearLayout
@@ -78,21 +79,21 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/btnLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:background="#e60000"
-                android:onClick="login"
+                android:onClick="onClickLogin"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:text="Login"
                 android:textColor="#ffffff" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btnRegister"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
