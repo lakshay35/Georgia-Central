@@ -84,23 +84,23 @@ public class UserSchema extends SQLiteOpenHelper{
             return true;
     }//addUser
 
-    //untested function
+    //Tested - Works Great
     public void updateUser(User user){
         SQLiteDatabase db = getWritableDatabase();
 
         String query = "UPDATE " + TABLE_USER + " SET " +
-                        COLUMN_FIRSTNAME + " = " + user.getFirstName() + ", " +
-                        COLUMN_LASTNAME + " = " + user.getLastName() + ", " +
-                        COLUMN_PASSWORD + " = " + user.getPassword() + ", " +
-                        COLUMN_PHONENUMBER + " = " + user.getPhoneNumber()  +
-                        " WHERE " + COLUMN_EMAIL + " = " + user.getEmail();
+                        COLUMN_FIRSTNAME + " = '" + user.getFirstName() + "', " +
+                        COLUMN_LASTNAME + " = '" + user.getLastName() + "', " +
+                        COLUMN_PASSWORD + " = '" + user.getPassword() + "', " +
+                        COLUMN_PHONENUMBER + " = '" + user.getPhoneNumber()  +
+                        "' WHERE " + COLUMN_EMAIL + " = '" + user.getEmail() + "'";
 
         db.execSQL(query);
 
         db.close();
     }//updateUser
 
-    //untested function
+    //Tested - Works Great
     public User retrieveUser(User user){
         SQLiteDatabase db               = getReadableDatabase();
         String query                    = "SELECT * FROM " + TABLE_USER + " WHERE " + COLUMN_EMAIL + " = ?";

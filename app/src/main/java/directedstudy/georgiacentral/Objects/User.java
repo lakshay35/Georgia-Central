@@ -24,10 +24,13 @@ public class User {
     }//User
 
     public User(String email, String password) {
-
         this.email = email;
         this.password = password;
     }//User
+
+    public User(String email) {
+        this.email = email;
+    }
 
     public int getUserID() {
         return userID;
