@@ -1,6 +1,8 @@
-package directedstudy.georgiacentral;
+package directedstudy.georgiacentral.Activities;
 
+import directedstudy.georgiacentral.Email.EmailUtility;
 import directedstudy.georgiacentral.Objects.User;
+import directedstudy.georgiacentral.R;
 import directedstudy.georgiacentral.Tables.UserSchema;
 
 import android.app.ProgressDialog;
@@ -8,6 +10,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -37,37 +40,40 @@ public class Registration extends AppCompatActivity {
     }//onCreate
 
     public void onClickSubmit(View View){
-        final ProgressDialog mDialog = new ProgressDialog(this);;
+        final ProgressDialog mprogressDialog = new ProgressDialog(this);;
 
-        mDialog.setMessage("Creating User please wait...");
-        mDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        mDialog.setIndeterminate(true);
-        mDialog.setCanceledOnTouchOutside(false);
-        mDialog.show();
+        mprogressDialog.setMessage("Creating User please wait...");
+        mprogressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mprogressDialog.setIndeterminate(true);
+        mprogressDialog.setCanceledOnTouchOutside(false);
+        mprogressDialog.show();
 
         new Handler().postDelayed(new Runnable() {
 
             @Override
             public void run() {
-                mDialog.dismiss();
+                mprogressDialog.dismiss();
             }//run
 
         }, 1000);
 
         User user = new User(etFirstName.getText().toString(), etLastName.getText().toString(), etEmail.getText().toString(), etPassword.getText().toString(), etPhoneNumber.getText().toString());
 
-        if(etEmail.getText().toString().toLowerCase().indexOf("@uga.edu") == -1)
+        if(etEmail.getText().toString().toLowerCase().indexOf("@uga.edu") == -1) {
             Toast.makeText(getApplicationContext(), "UGA Email Required", Toast.LENGTH_LONG).show();
+        }
         else{
             boolean isRegistered = userSchema.addUser(user);
 
             if(isRegistered == true) {
                 Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_LONG).show();
 
+                sendConfirmationEmail(); // Send email
+
                 Intent intent = new Intent(this, Login.class);
 
                 startActivity(intent);
-            }else {
+            } else {
                 Toast.makeText(getApplicationContext(), "Registration Error", Toast.LENGTH_LONG).show();
             }//if else
         }//if else
@@ -75,7 +81,29 @@ public class Registration extends AppCompatActivity {
 
     public void onClickCancel(View view){
         Intent intent = new Intent(this, Login.class);
-
         startActivity(intent);
     }//onClickCancel
+
+    private void sendConfirmationEmail() {
+        final ProgressDialog progressDialog = new ProgressDialog(Registration.this);
+        progressDialog.setTitle("Sending Confirmation Email...");
+        progressDialog.setMessage("Please wait");
+        progressDialog.show();
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    EmailUtility email = new EmailUtility();
+                    email.sendMail("Account Confirmation",
+                            "You have successfully been registered. Thank you for joining Georgia Central.",
+                            "GeorgiaCentral",
+                            etEmail.getText().toString());
+                    progressDialog.dismiss();
+                } catch (Exception e) {
+                    Log.e("mylog", "Error: " + e.getMessage());
+                }
+            }
+        });
+        thread.start();
+    }//SendConfirmationEmail
 }

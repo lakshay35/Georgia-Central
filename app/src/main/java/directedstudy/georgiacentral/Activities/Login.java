@@ -1,15 +1,19 @@
-package directedstudy.georgiacentral;
+package directedstudy.georgiacentral.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
+import directedstudy.georgiacentral.Email.EmailUtility;
 import directedstudy.georgiacentral.Objects.User;
+import directedstudy.georgiacentral.R;
 import directedstudy.georgiacentral.Tables.UserSchema;
 
 public class Login extends AppCompatActivity {
@@ -62,14 +66,23 @@ public class Login extends AppCompatActivity {
             Intent intent = new Intent(this, Navigator.class);
 
             startActivity(intent);
-        }else
+        } else
             Toast.makeText(getApplicationContext(), "Login Error", Toast.LENGTH_LONG).show();
     }//onClickLogin
 
     public void onClickRegister(View view) {
         Intent intent = new Intent(this, Registration.class);
-
         startActivity(intent);
     }//onClickRegister
+
+    public void onClickForgotPassword(View view) {
+        Intent intent = new Intent(this, ForgotPassword.class);
+        startActivity(intent);
+    }//onClickForgotPassword
+
+    public void onClickChangePassword(View view) {
+        Intent intent = new Intent(this, ChangePassword.class);
+        startActivity(intent);
+    }//onClickChangePassword
 
 }//class
