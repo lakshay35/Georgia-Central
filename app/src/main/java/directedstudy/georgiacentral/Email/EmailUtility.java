@@ -25,6 +25,9 @@ import directedstudy.georgiacentral.Objects.JSSEProvider;
  * Created by lakshaysharma on 1/24/18.
  */
 
+/**
+ * Represents the EmailUtility class that contains functions to send emails
+ */
 public class EmailUtility extends Authenticator {
 
     private String host = "smtp.gmail.com";
@@ -32,11 +35,18 @@ public class EmailUtility extends Authenticator {
     private String password = "ecommercecsci4050";
     private Session session;
 
+    /**
+     * Static constructor
+     */
     static {
         Security.addProvider(new JSSEProvider());
-    }//static
+    }
 
 
+    /**
+     * Constructor to represent an Email Utility Object
+     * @return An EmailUtility Object
+     */
     public EmailUtility() {
         Properties props = new Properties();
         props.setProperty("mail.transport.protocol", "smtp");
@@ -52,10 +62,22 @@ public class EmailUtility extends Authenticator {
         session = Session.getDefaultInstance(props, this);
     }
 
+    /**
+     * Authenticates a user
+     * @return PasswordAuthnetication Onbject
+     */
     protected PasswordAuthentication getPasswordAuthentication() {
         return new PasswordAuthentication(user, password);
     }
 
+    /**
+     * Sends an email to the user using the information provided
+     * @param subject
+     * @param body
+     * @param sender
+     * @param recipients
+     * @throws Exception
+     */
     public synchronized void sendMail(String subject, String body, String sender, String recipients) throws Exception {
         try {
             MimeMessage message = new MimeMessage(session);
@@ -70,28 +92,47 @@ public class EmailUtility extends Authenticator {
             Transport.send(message);
         } catch (Exception e) {
             Log.d("Exception:", "Error in sending: " + e.toString());
-        }//catch
+        }
     }
 
+    /**
+     * Represents the ByteArrayDS that is used to convert Strings to bytes while sending emails
+     */
     public class ByteArrayDS implements DataSource {
         private byte[] bytes;
         private String type;
 
+        /**
+         * Constructor
+         * @param data
+         * @param type
+         */
         public ByteArrayDS(byte[] data, String type) {
             super();
             this.bytes = data;
             this.type = type;
         }
 
+        /**
+         * Constructor
+         * @param data
+         */
         public ByteArrayDS(byte[] data) {
             super();
             this.bytes = data;
         }
 
+        /**
+         * Sets the type
+         * @param type
+         */
         public void setType(String type) {
             this.type = type;
         }
 
+        /**
+         * @return ContentType
+         */
         public String getContentType() {
             if (type == null)
                 return "application/octet-stream";
@@ -99,14 +140,25 @@ public class EmailUtility extends Authenticator {
                 return type;
         }
 
+        /**
+         *
+         * @return An InputStream Object
+         * @throws IOException
+         */
         public InputStream getInputStream() throws IOException {
             return new ByteArrayInputStream(bytes);
         }
 
+        /**
+         * @return Name of the DS
+         */
         public String getName() {
             return "ByteArrayDataSource";
         }
 
+        /**
+         * @throws IOException
+         */
         public OutputStream getOutputStream() throws IOException {
             throw new IOException("Not Supported");
         }

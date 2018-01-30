@@ -15,10 +15,16 @@ import directedstudy.georgiacentral.Objects.User;
 import directedstudy.georgiacentral.R;
 import directedstudy.georgiacentral.Tables.UserSchema;
 
+/**
+ * Represents the ForgotPassword view and its functionalities
+ */
 public class ForgotPassword extends AppCompatActivity {
 
     EditText etEmail;
-
+    /***
+     * Sets up the ForgotPassword View and retrieves objects
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +33,11 @@ public class ForgotPassword extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmail);
     }
 
+    /**
+     * Submit Button Listener
+     * Makes a DB request to update User's password with a temporary password
+     * @param view
+     */
     public void onSubmitClick(View view) {
         UserSchema userSchema = new UserSchema(this);
         User user = userSchema.retrieveUser(new User(etEmail.getText().toString()));
@@ -61,6 +72,10 @@ public class ForgotPassword extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Creates a temporary password
+     * @return temporary password
+     */
     private String getTempPassword() {
         String [] characters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S",
                 "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o",
@@ -72,5 +87,5 @@ public class ForgotPassword extends AppCompatActivity {
             sb.append(characters[random.nextInt(characters.length)]);
         }
         return sb.toString();
-    }//getTempPassword
+    }
 }

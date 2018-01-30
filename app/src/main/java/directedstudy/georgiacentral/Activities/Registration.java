@@ -15,6 +15,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * Represents the Registration Page
+ */
 public class Registration extends AppCompatActivity {
 
     EditText etFirstName;
@@ -24,6 +27,10 @@ public class Registration extends AppCompatActivity {
     EditText etPhoneNumber;
     UserSchema userSchema;
 
+    /**
+     * Sets up the Registration page and retrieves its objects
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +46,12 @@ public class Registration extends AppCompatActivity {
         setTitle("Register");
     }//onCreate
 
-    public void onClickSubmit(View View){
+    /**
+     * Submit Button Listener
+     * Makes a Database request to create a user record
+     * @param view
+     */
+    public void onClickSubmit(View view){
         final ProgressDialog mprogressDialog = new ProgressDialog(this);;
 
         mprogressDialog.setMessage("Creating User please wait...");
@@ -79,11 +91,19 @@ public class Registration extends AppCompatActivity {
         }//if else
     }//onClickSubmit
 
+    /**
+     * Cancel Button Listener
+     * Transfers user to the Login Activity
+     * @param view
+     */
     public void onClickCancel(View view){
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
     }//onClickCancel
 
+    /**
+     * Sends a confirmation email to the user's email address
+     */
     private void sendConfirmationEmail() {
         final ProgressDialog progressDialog = new ProgressDialog(Registration.this);
         progressDialog.setTitle("Sending Confirmation Email...");

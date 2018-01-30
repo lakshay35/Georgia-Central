@@ -6,8 +6,11 @@ import java.security.Provider;
 /**
  * Created by lakshaysharma on 1/24/18.
  */
-
 public class JSSEProvider extends Provider{
+
+    /**
+     * Creates a Java Secure Socket Extension Provider to send email
+     */
     public JSSEProvider() {
         super("HarmonyJSSE", 1.0, "Harmony JSSE Provider");
         AccessController.doPrivileged(new java.security.PrivilegedAction<Void>() {
