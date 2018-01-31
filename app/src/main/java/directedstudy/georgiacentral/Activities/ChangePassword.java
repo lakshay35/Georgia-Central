@@ -12,12 +12,19 @@ import directedstudy.georgiacentral.Objects.User;
 import directedstudy.georgiacentral.R;
 import directedstudy.georgiacentral.Tables.UserSchema;
 
+/**
+ * Represents the ChangePassword view and its functionalities
+ */
 public class ChangePassword extends AppCompatActivity {
 
     EditText etEmail;
     EditText etOldPass;
     EditText etNewPass;
 
+    /***
+     * Sets up the ChangePassword View and retrieves objects
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +34,11 @@ public class ChangePassword extends AppCompatActivity {
         etNewPass = findViewById(R.id.etNewPass);
     }
 
+    /**
+     * Submit Button Listener
+     * Makes a DB request to update User's password with a new password
+     * @param view
+     */
     public void onClickSubmit(View view) {
         if(etOldPass.getText().toString().equals(etNewPass.getText().toString())) {
             Toast.makeText(getApplicationContext(), "Please enter a password different from your current one", Toast.LENGTH_LONG).show();

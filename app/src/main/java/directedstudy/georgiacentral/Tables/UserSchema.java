@@ -20,10 +20,18 @@ public class UserSchema extends SQLiteOpenHelper{
     public static final String COLUMN_PHONENUMBER   = "phoneNumber";
     public static final String COLUMN_ISACTIVE      = "isActive";
 
+    /**
+     * Constructor
+     * @param context
+     */
     public UserSchema(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    /**
+     * Creates a database
+     * @param db
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query = "CREATE TABLE " + TABLE_USER + "(" +
@@ -44,6 +52,11 @@ public class UserSchema extends SQLiteOpenHelper{
         onCreate(db);
     }//onUpgrade
 
+    /**
+     * Logs user in
+     * @param user
+     * @return User object or null
+     */
     public User logIn(User user) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -62,6 +75,11 @@ public class UserSchema extends SQLiteOpenHelper{
         return null;
     }//logIn
 
+    /**
+     * Adds a user to the database
+     * @param user
+     * @return boolean representing success of failure
+     */
     public boolean addUser(User user){
         ContentValues values = new ContentValues();
 
@@ -85,6 +103,11 @@ public class UserSchema extends SQLiteOpenHelper{
     }//addUser
 
     //Tested - Works Great
+
+    /**
+     * Updates User data in the database
+     * @param user
+     */
     public void updateUser(User user){
         SQLiteDatabase db = getWritableDatabase();
 
@@ -101,6 +124,12 @@ public class UserSchema extends SQLiteOpenHelper{
     }//updateUser
 
     //Tested - Works Great
+
+    /**
+     * Retrieves user data from the database
+     * @param user
+     * @return User object
+     */
     public User retrieveUser(User user){
         SQLiteDatabase db               = getReadableDatabase();
         String query                    = "SELECT * FROM " + TABLE_USER + " WHERE " + COLUMN_EMAIL + " = ?";
@@ -118,6 +147,11 @@ public class UserSchema extends SQLiteOpenHelper{
     }//retrieveUser
 
     //untested function
+
+    /**
+     * Retrieves a list of all the users
+     * @return ArrayList<User> Object
+     */
     public ArrayList<User> retrieveUsers(){
         ArrayList<User> userList         = new ArrayList<User>();
         SQLiteDatabase db                   = getReadableDatabase();
