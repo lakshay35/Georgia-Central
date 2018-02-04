@@ -153,7 +153,7 @@ public class UserSchema extends SQLiteOpenHelper{
      * @return ArrayList<User> Object
      */
     public ArrayList<User> retrieveUsers(){
-        ArrayList<User> userList         = new ArrayList<User>();
+        ArrayList<User> userList            = new ArrayList<User>();
         SQLiteDatabase db                   = getReadableDatabase();
         String query                        = "SELECT * FROM " + TABLE_USER;
         Cursor cursor                       = db.rawQuery(query,null);

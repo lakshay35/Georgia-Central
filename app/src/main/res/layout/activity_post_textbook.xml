@@ -83,7 +83,7 @@
             android:text="Select PIcture" />
 
         <Button
-            android:id="@+id/btnSubmitPost"
+            android:id="@+id/btnSubmit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/etPrice"
@@ -96,7 +96,7 @@
             android:id="@+id/btnCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/btnSubmitPost"
+            android:layout_alignBottom="@+id/btnSubmit"
             android:layout_alignEnd="@+id/etPrice"
             android:text="Cancel" />
     </RelativeLayout>
