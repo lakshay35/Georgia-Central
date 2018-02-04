@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="directedstudy.georgiacentral.Activities.PostTextbook">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <ImageView
+            android:id="@+id/ivPicture"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/etBookTitle"
+            android:layout_marginStart="14dp"
+            android:src="@drawable/book" />
+
+        <EditText
+            android:id="@+id/etBookTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="23dp"
+            android:layout_marginTop="18dp"
+            android:ems="10"
+            android:hint="Book Title"
+            android:inputType="text|textPersonName" />
+
+        <EditText
+            android:id="@+id/etAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ivPicture"
+            android:layout_alignStart="@+id/etBookTitle"
+            android:ems="10"
+            android:hint="Author"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/etCourseNumber"
+            android:layout_width="275dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/ivPicture"
+            android:layout_below="@+id/etAuthor"
+            android:layout_marginTop="71dp"
+            android:ems="10"
+            android:hint="Course Number (ex: CSCI2720)"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/etPrice"
+            android:layout_width="275dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/etCondition"
+            android:layout_below="@+id/etCondition"
+            android:layout_marginTop="17dp"
+            android:ems="10"
+            android:hint="Price "
+            android:inputType="textPersonName" />
+
+        <Spinner
+            android:id="@+id/etCondition"
+            android:layout_width="275dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/etCourseNumber"
+            android:layout_below="@+id/etCourseNumber"
+            android:layout_marginTop="21dp" />
+
+        <Button
+            android:id="@+id/btnPicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/etCourseNumber"
+            android:layout_below="@+id/etAuthor"
+            android:layout_marginTop="13dp"
+            android:text="Select PIcture" />
+
+        <Button
+            android:id="@+id/btnSubmitPost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/etPrice"
+            android:layout_below="@+id/etPrice"
+            android:layout_marginStart="61dp"
+            android:layout_marginTop="49dp"
+            android:text="Submit Post" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/btnSubmitPost"
+            android:layout_alignEnd="@+id/etPrice"
+            android:text="Cancel" />
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>
