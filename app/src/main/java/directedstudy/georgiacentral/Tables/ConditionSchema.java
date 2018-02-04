@@ -24,19 +24,9 @@ public class ConditionSchema extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query = "CREATE TABLE " + TABLE_CONDITION + "(" +
+        String query = "CREATE TABLE IF NOT EXISTS " + TABLE_CONDITION + "(" +
                 COLUMN_CONDITIONID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_CONDITION + " TEXT NOT NULL " +
-                ");";
-
-        db.execSQL(query);
-
-        query = "INSERT INTO " + TABLE_CONDITION + " VALUES(" +
-                "New, " +
-                "Used - Very Good, " +
-                "Used - Good, " +
-                "Used - Acceptable, " +
-                "Used - Wear and Tear " +
                 ");";
 
         db.execSQL(query);
@@ -50,6 +40,7 @@ public class ConditionSchema extends SQLiteOpenHelper {
 
     public List<Condition> getConditionList(){
         SQLiteDatabase db               = getReadableDatabase();
+        onCreate(db);
         List<Condition> conditionList   = new ArrayList<>();
         String query                    = "SELECT  * FROM " + TABLE_CONDITION;
         Cursor cursor                   = db.rawQuery(query, null);
@@ -63,7 +54,26 @@ public class ConditionSchema extends SQLiteOpenHelper {
         cursor.close();
         db.close();
 
-        return conditionList;
+        if(conditionList.size() <= 0){
+            addConditions();
+            return getConditionList();
+        }else
+            return conditionList;
+
     }//getConditionList
+
+    public void addConditions(){
+        SQLiteDatabase db               = getWritableDatabase();
+
+        String query = "INSERT INTO " + TABLE_CONDITION + " (condition) VALUES" +
+                "('New'), " +
+                "('Used - Very Good'), " +
+                "('Used - Good'), " +
+                "('Used - Acceptable'), " +
+                "('Used - Wear and Tear') " +
+                ";";
+
+        db.execSQL(query);
+    }//addConditions
 
 }//class
