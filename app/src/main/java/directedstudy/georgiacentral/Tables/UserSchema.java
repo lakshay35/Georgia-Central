@@ -26,7 +26,7 @@ public class UserSchema extends SQLiteOpenHelper{
      */
     public UserSchema(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
+    }//UserSchema
 
     /**
      * Creates a database

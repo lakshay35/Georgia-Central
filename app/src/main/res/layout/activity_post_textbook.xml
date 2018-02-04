@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteY="0dp"
+        tools:ignore="MissingConstraints">
 
         <ImageView
             android:id="@+id/ivPicture"
@@ -58,15 +59,15 @@
             android:id="@+id/etPrice"
             android:layout_width="275dp"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/etCondition"
-            android:layout_below="@+id/etCondition"
+            android:layout_alignStart="@+id/spCondition"
+            android:layout_below="@+id/spCondition"
             android:layout_marginTop="17dp"
             android:ems="10"
             android:hint="Price "
             android:inputType="textPersonName" />
 
         <Spinner
-            android:id="@+id/etCondition"
+            android:id="@+id/spCondition"
             android:layout_width="275dp"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/etCourseNumber"
@@ -90,6 +91,7 @@
             android:layout_below="@+id/etPrice"
             android:layout_marginStart="61dp"
             android:layout_marginTop="49dp"
+            android:onClick="onClickSubmit"
             android:text="Submit Post" />
 
         <Button
@@ -98,6 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/btnSubmit"
             android:layout_alignEnd="@+id/etPrice"
+            android:onClick="onClickCancel"
             android:text="Cancel" />
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

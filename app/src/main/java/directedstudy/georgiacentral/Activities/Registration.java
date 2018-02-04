@@ -73,8 +73,7 @@ public class Registration extends AppCompatActivity {
 
         if(etEmail.getText().toString().toLowerCase().indexOf("@uga.edu") == -1) {
             Toast.makeText(getApplicationContext(), "UGA Email Required", Toast.LENGTH_LONG).show();
-        }
-        else{
+        }else{
             boolean isRegistered = userSchema.addUser(user);
 
             if(isRegistered == true) {

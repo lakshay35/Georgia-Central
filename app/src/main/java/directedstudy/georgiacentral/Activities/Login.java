@@ -73,7 +73,7 @@ public class Login extends AppCompatActivity {
 
             sessionManager.createLoginSession(dbUser.getFirstName()+dbUser.getLastName(), dbUser.getEmail());
 
-            Intent intent = new Intent(this, Navigator.class);
+            Intent intent = new Intent(this, PostTextbook.class);
 
             startActivity(intent);
         } else
