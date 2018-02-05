@@ -6,8 +6,8 @@ public class Course {
     private String courseNumber;
 
     public Course(int courseID, String courseNumber) {
-        this.courseID = courseID;
-        this.courseNumber = courseNumber;
+        this.courseID       = courseID;
+        this.courseNumber   = courseNumber;
     }//Course
 
     public int getCourseID() {

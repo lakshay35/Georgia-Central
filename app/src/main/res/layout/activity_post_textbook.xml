@@ -53,7 +53,8 @@
             android:layout_marginTop="71dp"
             android:ems="10"
             android:hint="Course Number (ex: CSCI2720)"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:maxLength="8"/>
 
         <EditText
             android:id="@+id/etPrice"
@@ -64,7 +65,7 @@
             android:layout_marginTop="17dp"
             android:ems="10"
             android:hint="Price "
-            android:inputType="textPersonName" />
+            android:inputType="numberDecimal" />
 
         <Spinner
             android:id="@+id/spCondition"

@@ -2,23 +2,31 @@ package directedstudy.georgiacentral.Objects;
 
 public class TextBookPost {
     private int postID;
-    private String bookTitle;
-    private String author;
-    private String courseNumber;
-    private String condition;
-    private String name;
-    private String email;
+    private int userID;
+    private int bookID;
+    private int courseID;
+    private int conditionID;
+    private String price;
     private String expireDate;
     private String postDate;
 
-    public TextBookPost(int postID, String bookTitle, String author, String courseNumber, String condition, String name, String email, String expireDate, String postDate) {
+    public TextBookPost(int postID, int userID, int bookID, int courseID, int conditionID, String price, String expireDate, String postDate) {
         this.postID         = postID;
-        this.bookTitle      = bookTitle;
-        this.author         = author;
-        this.courseNumber   = courseNumber;
-        this.condition      = condition;
-        this.name           = name;
-        this.email          = email;
+        this.userID         = userID;
+        this.bookID         = bookID;
+        this.courseID       = courseID;
+        this.conditionID    = conditionID;
+        this.price          = price;
+        this.expireDate     = expireDate;
+        this.postDate       = postDate;
+    }//TextBookPost
+
+    public TextBookPost(int userID, int bookID, int courseID, int conditionID, String price, String expireDate, String postDate) {
+        this.userID         = userID;
+        this.bookID         = bookID;
+        this.courseID       = courseID;
+        this.conditionID    = conditionID;
+        this.price          = price;
         this.expireDate     = expireDate;
         this.postDate       = postDate;
     }//TextBookPost
@@ -31,53 +39,45 @@ public class TextBookPost {
         this.postID = postID;
     }//setPostID
 
-    public String getBookTitle() {
-        return bookTitle;
-    }//getBookTitle
+    public int getUserID() {
+        return userID;
+    }//getUserID
 
-    public void setBookTitle(String bookTitle) {
-        this.bookTitle = bookTitle;
-    }//setBookTitle
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }//setUserID
 
-    public String getAuthor() {
-        return author;
-    }//getAuthor
+    public int getBookID() {
+        return bookID;
+    }//getBookID
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }//setAuthor
+    public void setBookID(int bookID) {
+        this.bookID = bookID;
+    }//setBookID
 
-    public String getCourseNumber() {
-        return courseNumber;
-    }//getCourseNumber
+    public int getCourseID() {
+        return courseID;
+    }//getCourseID
 
-    public void setCourseNumber(String courseNumber) {
-        this.courseNumber = courseNumber;
-    }//setCourseNumber
+    public void setCourseID(int courseID) {
+        this.courseID = courseID;
+    }//setCourseID
 
-    public String getCondition() {
-        return condition;
-    }//getCondition
+    public int getConditionID() {
+        return conditionID;
+    }//getConditionID
 
-    public void setCondition(String condition) {
-        this.condition = condition;
-    }//setCondition
+    public void setConditionID(int conditionID) {
+        this.conditionID = conditionID;
+    }//setConditionID
 
-    public String getName() {
-        return name;
-    }//getName
+    public String getPrice() {
+        return price;
+    }//getPrice
 
-    public void setName(String name) {
-        this.name = name;
-    }//setName
-
-    public String getEmail() {
-        return email;
-    }//getEmail
-
-    public void setEmail(String email) {
-        this.email = email;
-    }//setEmail
+    public void setPrice(String price) {
+        this.price = price;
+    }//setPrice
 
     public String getExpireDate() {
         return expireDate;
