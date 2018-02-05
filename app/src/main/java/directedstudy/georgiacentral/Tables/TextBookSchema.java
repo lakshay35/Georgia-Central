@@ -23,7 +23,7 @@ public class TextBookSchema extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query = "CREATE TABLE " + TABLE_TEXTBOOK + "(" +
+        String query = "CREATE TABLE IF NOT EXISTS " + TABLE_TEXTBOOK + "(" +
                 COLUMN_BOOKID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_BOOKTITLE + " TEXT NOT NULL, " +
                 COLUMN_AUTHOR + " TEXT NOT NULL " +
@@ -56,7 +56,10 @@ public class TextBookSchema extends SQLiteOpenHelper {
 
     public Textbook retrieveTextBook(Textbook textbook){
         SQLiteDatabase db               = getReadableDatabase();
-        String query                    = "SELECT * FROM " + TABLE_TEXTBOOK + " WHERE " + COLUMN_BOOKTITLE + " = ? AND " + COLUMN_AUTHOR + " = ?";
+
+        onCreate(db);
+
+        String query                    = "SELECT * FROM " + TABLE_TEXTBOOK + " WHERE " + COLUMN_BOOKTITLE + " = ? AND " + COLUMN_AUTHOR + " = ? ";
         Cursor cursor                   = db.rawQuery(query, new String [] {textbook.getBookTitle(), textbook.getAuthor()});
 
         if(cursor != null && cursor.moveToFirst()&& cursor.getCount()>0){

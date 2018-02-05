@@ -14,7 +14,7 @@ import directedstudy.georgiacentral.Objects.User;
 public class TextBookPostSchema extends SQLiteOpenHelper{
         private static final int DATABASE_VERSION       = 1;
         private static final String DATABASE_NAME       = "BookDawg.db";
-        public static final String TABLE_TEXTBOOKPOST   = "TextBook-Post";
+        public static final String TABLE_TEXTBOOKPOST   = "TextBookPost";
         public static final String COLUMN_POSTID        = "postID";
         public static final String COLUMN_USERID        = "userID";
         public static final String COLUMN_BOOKID        = "bookID";
@@ -30,16 +30,21 @@ public class TextBookPostSchema extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query = "CREATE TABLE " + TABLE_TEXTBOOKPOST + "(" +
+        String query = "CREATE TABLE IF NOT EXISTS " + TABLE_TEXTBOOKPOST + "(" +
                 COLUMN_POSTID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_USERID + " INTEGER NOT NULL, " +
                 COLUMN_BOOKID + " INTEGER NOT NULL, " +
-                COLUMN_COURSEID + " INTEGER NOT NULL UNIQUE, " +
+                COLUMN_COURSEID + " INTEGER, " +
                 COLUMN_CONDITIONID + " INTEGER NOT NULL, " +
                 COLUMN_PRICE + " NUMERIC NOT NULL, " +
-                COLUMN_EXPIREDATE + " REAL NOT NULL, " +
-                COLUMN_POSTDATE + " REAL NOT NULL, " +
-                " FOREIGN KEY (" + COLUMN_USERID + ") REFERENCES User(userId));";
+                COLUMN_EXPIREDATE + " TEXT NOT NULL, " +
+                COLUMN_POSTDATE + " TEXT NOT NULL, " +
+                " FOREIGN KEY (" + COLUMN_USERID + ") REFERENCES User(userId)," +
+                " FOREIGN KEY (" + COLUMN_BOOKID + ") REFERENCES Textbook(bookID)," +
+                " FOREIGN KEY (" + COLUMN_COURSEID + ") REFERENCES Course(courseID)," +
+                " FOREIGN KEY (" + COLUMN_CONDITIONID + ") REFERENCES Condition(conditionID)" +
+                ");";
+
         db.execSQL(query);
     }//onCreate
 
@@ -61,6 +66,9 @@ public class TextBookPostSchema extends SQLiteOpenHelper{
         values.put(COLUMN_POSTDATE, textBookPost.getPostDate());
 
         SQLiteDatabase db   = getWritableDatabase();
+
+        onCreate(db);
+
         long result         = db.insert(TABLE_TEXTBOOKPOST, null, values);
 
         db.close();

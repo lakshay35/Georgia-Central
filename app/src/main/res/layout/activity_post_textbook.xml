@@ -53,8 +53,7 @@
             android:layout_marginTop="71dp"
             android:ems="10"
             android:hint="Course Number (ex: CSCI2720)"
-            android:inputType="textPersonName"
-            android:maxLength="8"/>
+            android:inputType="textPersonName"/>
 
         <EditText
             android:id="@+id/etPrice"

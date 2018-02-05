@@ -23,9 +23,9 @@ public class CourseSchema extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query = "CREATE TABLE " + TABLE_COURSE + "(" +
+        String query = "CREATE TABLE IF NOT EXISTS " + TABLE_COURSE + "(" +
                 COLUMN_COURSEID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_CourseNumber + " TEXT NOT NULL " +
+                COLUMN_CourseNumber + " TEXT " +
                 ");";
         db.execSQL(query);
     }//onCreate
@@ -38,6 +38,9 @@ public class CourseSchema extends SQLiteOpenHelper {
 
     public Course retrieveCourse(Course course){
         SQLiteDatabase db               = getReadableDatabase();
+
+        onCreate(db);
+
         String query                    = "SELECT * FROM " + TABLE_COURSE + " WHERE " + COLUMN_CourseNumber + " = ?";
         Cursor cursor                   = db.rawQuery(query, new String [] {course.getCourseNumber()});
 

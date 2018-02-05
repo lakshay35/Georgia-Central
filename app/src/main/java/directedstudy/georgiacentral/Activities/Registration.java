@@ -69,7 +69,7 @@ public class Registration extends AppCompatActivity {
 
         }, 1000);
 
-        User user = new User(etFirstName.getText().toString(), etLastName.getText().toString(), etEmail.getText().toString(), etPassword.getText().toString(), etPhoneNumber.getText().toString());
+        User user = new User(etFirstName.getText().toString().trim(), etLastName.getText().toString().trim(), etEmail.getText().toString().trim(), etPassword.getText().toString().trim(), etPhoneNumber.getText().toString().trim());
 
         if(etEmail.getText().toString().toLowerCase().indexOf("@uga.edu") == -1) {
             Toast.makeText(getApplicationContext(), "UGA Email Required", Toast.LENGTH_LONG).show();

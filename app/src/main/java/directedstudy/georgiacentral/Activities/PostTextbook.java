@@ -1,5 +1,8 @@
 package directedstudy.georgiacentral.Activities;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,10 +11,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import directedstudy.georgiacentral.Objects.Condition;
@@ -61,22 +67,52 @@ public class PostTextbook extends AppCompatActivity implements OnItemSelectedLis
     }//onCreate
 
     public void onClickSubmit(View view){
-        Textbook textbook               = new Textbook(etBookTitle.getText().toString(), etAuthor.getText().toString());
-        Course course                   = new Course(etCourseNumber.getText().toString());
+        final ProgressDialog mprogressDialog = new ProgressDialog(this);;
+
+        mprogressDialog.setMessage("Creating User please wait...");
+        mprogressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mprogressDialog.setIndeterminate(true);
+        mprogressDialog.setCanceledOnTouchOutside(false);
+        mprogressDialog.show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                mprogressDialog.dismiss();
+            }//run
+
+        }, 1000);
+
+        Textbook textbook               = new Textbook(etBookTitle.getText().toString().trim(), etAuthor.getText().toString().trim());
+        Course course                   = new Course(etCourseNumber.getText().toString().trim());
         int textBookID                  = retrieveBookID(textbook);
         int courseID                    = retrieveCourseID(course);
-        String condition                = spCondition.getSelectedItem().toString();
+        String condition                = spCondition.getSelectedItem().toString().trim();
         int conditionID                 = conditionSchema.retrieveCondition(condition).getConditionID();
-        String userName                 = sessionManager.getUserDetails().get("name");
-        int userID                      = userSchema.retrieveUser(userName).getUserID();
-        Calendar date                   = Calendar.getInstance();
-        String postDate                 = new SimpleDateFormat("yyyyMMdd").format(date);
+        String email                    = sessionManager.getUserDetails().get("email");
+        int userID                      = userSchema.retrieveUser(email).getUserID();
+        DateFormat df                   = new SimpleDateFormat("MM/dd/yyyy");
+        Calendar today                  = Calendar.getInstance();
+        Date date                       = today.getTime();
+        String postDate                 = df.format(date);
 
-        date.add(Calendar.MONTH,1);
+        today.add(Calendar.MONTH,1);
 
-        String expireDate               = new SimpleDateFormat("yyyyMMdd").format(date);
+        date                            = today.getTime();
+        String expireDate               = df.format(date);
         TextBookPost textBookPost       = new TextBookPost(userID, textBookID, courseID, conditionID, etPrice.getText().toString(), expireDate, postDate);
         boolean isPosted                = textBookPostSchema.addTextBookPost(textBookPost);
+
+        if(isPosted == true) {
+            Toast.makeText(getApplicationContext(), "Post Successful", Toast.LENGTH_LONG).show();
+
+            //Intent intent = new Intent(this, Login.class);
+
+            //startActivity(intent);
+        } else {
+            Toast.makeText(getApplicationContext(), "Post Error", Toast.LENGTH_LONG).show();
+        }//if else
     }//onClickSubmit
 
     public void onClickCancel(View view){
