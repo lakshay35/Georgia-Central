@@ -10,6 +10,10 @@ public class Course {
         this.courseNumber   = courseNumber;
     }//Course
 
+    public Course(String courseNumber) {
+        this.courseNumber   = courseNumber;
+    }//Course
+
     public int getCourseID() {
         return courseID;
     }//getCourseID

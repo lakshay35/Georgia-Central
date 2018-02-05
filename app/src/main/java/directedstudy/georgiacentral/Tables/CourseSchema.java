@@ -3,10 +3,12 @@ package directedstudy.georgiacentral.Tables;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import directedstudy.georgiacentral.Objects.Course;
+import directedstudy.georgiacentral.Objects.Textbook;
 
 public class CourseSchema extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION       = 1;
@@ -33,6 +35,22 @@ public class CourseSchema extends SQLiteOpenHelper {
 
         onCreate(db);
     }//onUpgrade
+
+    public Course retrieveCourse(Course course){
+        SQLiteDatabase db               = getReadableDatabase();
+        String query                    = "SELECT * FROM " + TABLE_COURSE + " WHERE " + COLUMN_CourseNumber + " = ?";
+        Cursor cursor                   = db.rawQuery(query, new String [] {course.getCourseNumber()});
+
+        if(cursor != null && cursor.moveToFirst()&& cursor.getCount()>0){
+            Course retrieveCourse = new Course(Integer.parseInt(cursor.getString(0)), cursor.getString(1));
+
+            return retrieveCourse;
+        }//if
+
+        cursor.close();
+
+        return null;
+    }//retrieveCourse
 
     public boolean addCourse(Course course){
         ContentValues values = new ContentValues();

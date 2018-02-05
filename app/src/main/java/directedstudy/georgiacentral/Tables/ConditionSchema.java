@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import directedstudy.georgiacentral.Objects.Condition;
+import directedstudy.georgiacentral.Objects.Textbook;
 
 public class ConditionSchema extends SQLiteOpenHelper {
 
@@ -61,6 +62,22 @@ public class ConditionSchema extends SQLiteOpenHelper {
             return conditionList;
 
     }//getConditionList
+
+    public Condition retrieveCondition(String condition){
+        SQLiteDatabase db               = getReadableDatabase();
+        String query                    = "SELECT * FROM " + TABLE_CONDITION + " WHERE " + COLUMN_CONDITION + " = ?";
+        Cursor cursor                   = db.rawQuery(query, new String [] {condition});
+
+        if(cursor != null && cursor.moveToFirst()&& cursor.getCount()>0){
+            Condition retrieveCondition = new Condition(Integer.parseInt(cursor.getString(0)), cursor.getString(1));
+
+            return retrieveCondition;
+        }//if
+
+        cursor.close();
+
+        return null;
+    }//retrieveCondition
 
     public void addConditions(){
         SQLiteDatabase db               = getWritableDatabase();

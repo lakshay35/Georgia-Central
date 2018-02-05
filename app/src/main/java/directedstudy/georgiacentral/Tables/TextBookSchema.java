@@ -60,14 +60,14 @@ public class TextBookSchema extends SQLiteOpenHelper {
         Cursor cursor                   = db.rawQuery(query, new String [] {textbook.getBookTitle(), textbook.getAuthor()});
 
         if(cursor != null && cursor.moveToFirst()&& cursor.getCount()>0){
-            Textbook retrieveUser = new Textbook(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2));
+            Textbook retrieveTextBook = new Textbook(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2));
 
-            return retrieveUser;
+            return retrieveTextBook;
         }//if
 
         cursor.close();
 
         return null;
-    }//retrieveUser
+    }//retrieveTextBook
 
 }//class
