@@ -60,8 +60,8 @@ public class Login extends AppCompatActivity {
 
         }, 1000);
 
-        String email    = etEmail.getText().toString();
-        String password = etPassword.getText().toString();
+        String email    = etEmail.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
 
         User user       = new User(email, password);
         User dbUser     = userSchema.logIn(user);

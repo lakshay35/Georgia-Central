@@ -85,23 +85,24 @@
             android:text="Select PIcture" />
 
         <Button
-            android:id="@+id/btnSubmit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/etPrice"
-            android:layout_below="@+id/etPrice"
-            android:layout_marginStart="61dp"
-            android:layout_marginTop="49dp"
-            android:onClick="onClickSubmit"
-            android:text="Submit Post" />
-
-        <Button
             android:id="@+id/btnCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/btnSubmit"
             android:layout_alignBottom="@+id/btnSubmit"
-            android:layout_alignEnd="@+id/etPrice"
+            android:layout_marginEnd="14dp"
+            android:layout_toStartOf="@+id/btnSubmit"
             android:onClick="onClickCancel"
             android:text="Cancel" />
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/etPrice"
+            android:layout_below="@+id/etPrice"
+            android:layout_marginTop="56dp"
+            android:onClick="onClickSubmit"
+            android:text="Submit Post" />
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
