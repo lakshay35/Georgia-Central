@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import directedstudy.georgiacentral.Objects.TextBookDisplay;
@@ -26,29 +27,21 @@ class TextBookDisplayAdapter extends ArrayAdapter<TextBookDisplay> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater vi   = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        convertView         = vi.inflate(R.layout.adapter_textbook_display_list, null);
-
-        TextBookDisplay textBookDisplayItem        = textBookDisplayList.get(position);
-        TextView tvBookTitle                       = (TextView) convertView.findViewById(R.id.tvBookTItle);
-        //TextView tvAuthor                          = (TextView) convertView.findViewById(R.id.tvAuthor);
-        //TextView tvCourseNumber                    = (TextView) convertView.findViewById(R.id.tvCourseNumber);
-        //TextView tvCondition                       = (TextView) convertView.findViewById(R.id.tvCondition);
-        //TextView tvPrice                           = (TextView) convertView.findViewById(R.id.tvPrice);
-        //TextView tvPostDate                        = (TextView) convertView.findViewById(R.id.tvPostDate);
-        //TextView tvName                            = (TextView) convertView.findViewById(R.id.tvName);
-        //TextView tvPhoneNumber                     = (TextView) convertView.findViewById(R.id.tvPhoneNumber);
-        //TextView tvEmail                           = (TextView) convertView.findViewById(R.id.tvEmail);
+        LayoutInflater vi                           = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        convertView                                 = vi.inflate(R.layout.adapter_textbook_display_list, null);
+        TextBookDisplay textBookDisplayItem         = textBookDisplayList.get(position);
+        TextView tvBookTitle                        = (TextView) convertView.findViewById(R.id.tvBookTitle);
+        TextView tvAuthor                           = (TextView) convertView.findViewById(R.id.tvAuthor);
+        TextView tvCourseNumber                     = (TextView) convertView.findViewById(R.id.tvCourseNumber);
+        TextView tvCondition                        = (TextView) convertView.findViewById(R.id.tvCondition);
+        TextView tvPrice                            = (TextView) convertView.findViewById(R.id.tvPrice);
+        String price                                = String.format("%.02f", textBookDisplayItem.getPrice());
 
         tvBookTitle.setText(textBookDisplayItem.getBookTitle());
-        //tvAuthor.setText(textBookDisplayItem.getAuthor());
-        //tvCourseNumber.setText(textBookDisplayItem.getCourseNumber());
-        //tvCondition.setText(textBookDisplayItem.getCondition());
-        //tvPrice.setText(Float.toString(textBookDisplayItem.getPrice()));
-        //tvPostDate.setText(textBookDisplayItem.getPostDate());
-        //tvName.setText(textBookDisplayItem.getName());
-        //tvPhoneNumber.setText(textBookDisplayItem.getPhoneNumber());
-        //tvEmail.setText(textBookDisplayItem.getEmail());
+        tvAuthor.setText("Author(s): " + textBookDisplayItem.getAuthor());
+        tvCourseNumber.setText("Course(s): " + textBookDisplayItem.getCourseNumber());
+        tvCondition.setText("Condition: " + textBookDisplayItem.getCondition());
+        tvPrice.setText("$" + price);
 
         return convertView;
     }//getView

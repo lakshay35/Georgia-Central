@@ -106,8 +106,6 @@ public class TextBookPostSchema extends SQLiteOpenHelper{
 
         Cursor c                                        = db.rawQuery(query, null); //, new String [] {bookTitle, courseNumber});
 
-        //c.moveToFirst();
-
         while (c.moveToNext()) {
             TextBookDisplay textBookDisplay = new TextBookDisplay(c.getInt(0), c.getString(1) + " " + c.getString(2), c.getString(3), c.getString(4), c.getString(5), c.getString(6), c.getString(7), c.getString(8), c.getFloat(9), c.getString(10));
 
