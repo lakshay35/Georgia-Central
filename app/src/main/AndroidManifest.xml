@@ -16,6 +16,7 @@
             android:label="BookDawg">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -25,8 +26,10 @@
             android:parentActivityName=".Activities.Login" />
         <activity android:name=".Activities.Registration" />
         <activity android:name=".Activities.ForgotPassword" />
-        <activity android:name=".Activities.ChangePassword"></activity>
-        <activity android:name=".Activities.PostTextbook"></activity>
+        <activity android:name=".Activities.ChangePassword" />
+        <activity android:name=".Activities.PostTextbook" />
+        <activity android:name=".Activities.TextbookSearch">
+        </activity>
     </application>
 
 </manifest>

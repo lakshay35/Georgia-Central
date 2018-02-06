@@ -70,7 +70,7 @@ public class PostTextbook extends AppCompatActivity implements OnItemSelectedLis
     public void onClickSubmit(View view){
         final ProgressDialog mprogressDialog = new ProgressDialog(this);;
 
-        mprogressDialog.setMessage("Creating User please wait...");
+        mprogressDialog.setMessage("Creating Post please wait...");
         mprogressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         mprogressDialog.setIndeterminate(true);
         mprogressDialog.setCanceledOnTouchOutside(false);
@@ -108,7 +108,7 @@ public class PostTextbook extends AppCompatActivity implements OnItemSelectedLis
         if(isPosted == true) {
             Toast.makeText(getApplicationContext(), "Post Successful", Toast.LENGTH_LONG).show();
 
-            Intent intent = new Intent(this, Login.class);
+            Intent intent = new Intent(this, TextbookSearch.class);
 
             startActivity(intent);
         } else {

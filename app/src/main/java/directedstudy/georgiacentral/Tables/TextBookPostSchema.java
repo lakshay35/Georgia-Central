@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.ContentValues;
 import java.util.ArrayList;
 
+import directedstudy.georgiacentral.Objects.TextBookDisplay;
 import directedstudy.georgiacentral.Objects.TextBookPost;
 import directedstudy.georgiacentral.Objects.Textbook;
 import directedstudy.georgiacentral.Objects.User;
@@ -78,6 +79,45 @@ public class TextBookPostSchema extends SQLiteOpenHelper{
         else
             return true;
     }//addTextBookPost
+
+    public ArrayList<TextBookDisplay> retrieveTextBookDisplayList(){ //String bookTitle, String courseNumber){
+        ArrayList<TextBookDisplay> textBookDisplayList  = new ArrayList<TextBookDisplay>();
+        SQLiteDatabase db                               = getReadableDatabase();
+        String query                                    = "SELECT " +
+                "   p.postID, " +
+                "   u.firstName, " +
+                "   u.lastName, " +
+                "   u.email, " +
+                "   u.phoneNumber, " +
+                "   b.bookTitle, " +
+                "   b.author, "  +
+                "   c.courseNumber, " +
+                "   co.condition, " +
+                "   p.price, " +
+                "   p.postDate " +
+                "   FROM TextBookPost p " +
+                "       INNER JOIN User u ON p.userID = u.userID " +
+                "       INNER JOIN Textbook b ON p.bookID = b.bookID " +
+                "       INNER JOIN Course c ON p.courseID = c.courseID " +
+                "       INNER JOIN Condition co ON p.conditionID = co.conditionID ";
+                //"   WHERE " +
+                //"       b.bookTitle = ? OR " +
+                //"       c.courseNumber = ? ";
+
+        Cursor c                                        = db.rawQuery(query, null); //, new String [] {bookTitle, courseNumber});
+
+        //c.moveToFirst();
+
+        while (c.moveToNext()) {
+            TextBookDisplay textBookDisplay = new TextBookDisplay(c.getInt(0), c.getString(1) + " " + c.getString(2), c.getString(3), c.getString(4), c.getString(5), c.getString(6), c.getString(7), c.getString(8), c.getFloat(9), c.getString(10));
+
+            textBookDisplayList.add(textBookDisplay);
+        }//while
+
+        c.close();
+
+        return textBookDisplayList;
+    }//retrieveTextBookDisplayList
 
 }//class
 
