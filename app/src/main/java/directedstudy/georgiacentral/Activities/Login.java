@@ -22,6 +22,7 @@ public class Login extends AppCompatActivity {
     private EditText etEmail;
     private EditText etPassword;
     private UserSchema userSchema;
+    SessionManager sessionManager;
 
     /**
      * Sets up the Login page and retrieves its objects
@@ -32,9 +33,10 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        etEmail     = (EditText) findViewById(R.id.etEmail);
-        etPassword  = (EditText) findViewById(R.id.etPassword);
-        userSchema  = new UserSchema(this);
+        etEmail         = (EditText) findViewById(R.id.etEmail);
+        etPassword      = (EditText) findViewById(R.id.etPassword);
+        userSchema      = new UserSchema(this);
+        sessionManager  = new SessionManager(getApplicationContext());
     }//onCreate
 
     /**
@@ -68,8 +70,6 @@ public class Login extends AppCompatActivity {
 
         if(dbUser != null) {
             Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_LONG).show();
-
-            SessionManager sessionManager = new SessionManager(getApplicationContext());
 
             sessionManager.createLoginSession(dbUser.getFirstName()+dbUser.getLastName(), dbUser.getEmail());
 

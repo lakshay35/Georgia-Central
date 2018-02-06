@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -59,7 +60,7 @@ public class PostTextbook extends AppCompatActivity implements OnItemSelectedLis
         textBookSchema                  = new TextBookSchema(this);
         courseSchema                    = new CourseSchema(this);
         textBookPostSchema              = new TextBookPostSchema(this);
-        sessionManager                  = new SessionManager(this);
+        sessionManager                  = new SessionManager(getApplicationContext());
         userSchema                      = new UserSchema(this);
 
         spCondition.setOnItemSelectedListener(this);
@@ -90,7 +91,7 @@ public class PostTextbook extends AppCompatActivity implements OnItemSelectedLis
         int courseID                    = retrieveCourseID(course);
         String condition                = spCondition.getSelectedItem().toString().trim();
         int conditionID                 = conditionSchema.retrieveCondition(condition).getConditionID();
-        String email                    = sessionManager.getUserDetails().get("email");
+        String email                    = sessionManager.getUserDetails().get(SessionManager.KEY_EMAIL);
         int userID                      = userSchema.retrieveUser(email).getUserID();
         DateFormat df                   = new SimpleDateFormat("MM/dd/yyyy");
         Calendar today                  = Calendar.getInstance();
@@ -107,9 +108,9 @@ public class PostTextbook extends AppCompatActivity implements OnItemSelectedLis
         if(isPosted == true) {
             Toast.makeText(getApplicationContext(), "Post Successful", Toast.LENGTH_LONG).show();
 
-            //Intent intent = new Intent(this, Login.class);
+            Intent intent = new Intent(this, Login.class);
 
-            //startActivity(intent);
+            startActivity(intent);
         } else {
             Toast.makeText(getApplicationContext(), "Post Error", Toast.LENGTH_LONG).show();
         }//if else

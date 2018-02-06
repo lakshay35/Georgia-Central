@@ -152,7 +152,7 @@ public class UserSchema extends SQLiteOpenHelper{
         Cursor cursor                   = db.rawQuery(query, new String [] {email});
 
         if(cursor != null && cursor.moveToFirst()&& cursor.getCount()>0){
-            User retrieveUser = new User(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
+            User retrieveUser = new User(cursor.getInt(0),cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
 
             return retrieveUser;
         }//if
