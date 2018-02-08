@@ -26,7 +26,7 @@ public class UserSchema extends SQLiteOpenHelper{
      */
     public UserSchema(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
+    }//UserSchema
 
     /**
      * Creates a database
@@ -146,6 +146,22 @@ public class UserSchema extends SQLiteOpenHelper{
         return null;
     }//retrieveUser
 
+    public User retrieveUser(String email){
+        SQLiteDatabase db               = getReadableDatabase();
+        String query                    = "SELECT * FROM " + TABLE_USER + " WHERE " + COLUMN_EMAIL + " = ?";
+        Cursor cursor                   = db.rawQuery(query, new String [] {email});
+
+        if(cursor != null && cursor.moveToFirst()&& cursor.getCount()>0){
+            User retrieveUser = new User(cursor.getInt(0),cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
+
+            return retrieveUser;
+        }//if
+
+        cursor.close();
+
+        return null;
+    }//retrieveUser
+
     //untested function
 
     /**
@@ -153,7 +169,7 @@ public class UserSchema extends SQLiteOpenHelper{
      * @return ArrayList<User> Object
      */
     public ArrayList<User> retrieveUsers(){
-        ArrayList<User> userList         = new ArrayList<User>();
+        ArrayList<User> userList            = new ArrayList<User>();
         SQLiteDatabase db                   = getReadableDatabase();
         String query                        = "SELECT * FROM " + TABLE_USER;
         Cursor cursor                       = db.rawQuery(query,null);

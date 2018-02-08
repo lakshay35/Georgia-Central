@@ -33,7 +33,4 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile 'com.android.support:design:26.1.0'
     compile 'de.hdodenhof:circleimageview:2.2.0'
-    implementation files('/Users/lakshaysharma/Downloads/activation.jar')
-    implementation files('/Users/lakshaysharma/Downloads/additionnal.jar')
-    implementation files('/Users/lakshaysharma/Downloads/mail.jar')
 }
