@@ -28,8 +28,8 @@
         <activity android:name=".Activities.ForgotPassword" />
         <activity android:name=".Activities.ChangePassword" />
         <activity android:name=".Activities.PostTextbook" />
-        <activity android:name=".Activities.TextbookSearch">
-        </activity>
+        <activity android:name=".Activities.TextbookSearch"></activity>
+        <activity android:name=".Activities.TextbookProfile"></activity>
     </application>
 
 </manifest>
