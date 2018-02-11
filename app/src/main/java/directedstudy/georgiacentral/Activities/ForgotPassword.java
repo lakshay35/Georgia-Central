@@ -88,4 +88,13 @@ public class ForgotPassword extends AppCompatActivity {
         }
         return sb.toString();
     }
+
+    /**
+     * OnClick Listener for cancel button
+     * @param view
+     */
+    public void onClickCancel(View view) {
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
+    }
 }

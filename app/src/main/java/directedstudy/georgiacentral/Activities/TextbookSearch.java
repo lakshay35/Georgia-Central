@@ -20,6 +20,7 @@ public class TextbookSearch extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_textbook_search);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         textBookPostSchema  = new TextBookPostSchema(this);
         lvTextBookList      = (ListView) findViewById(R.id.lvTextBookList);

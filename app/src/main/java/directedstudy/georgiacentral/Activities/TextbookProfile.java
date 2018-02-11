@@ -11,5 +11,6 @@ public class TextbookProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_textbook_profile);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 }
