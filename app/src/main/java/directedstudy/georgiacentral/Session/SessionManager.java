@@ -1,4 +1,4 @@
-package directedstudy.georgiacentral.Activities;
+package directedstudy.georgiacentral.Session;
 
 import java.util.HashMap;
 
@@ -32,6 +32,14 @@ public class SessionManager {
         editor.putString(KEY_EMAIL, email);
         editor.commit();
     }//createLoginSession
+
+    /**
+     * Updates user info in session
+     * @param name
+     */
+    public void updateUserInfo(String name) {
+        editor.putString(KEY_NAME, name);
+    }
 
     public void checkLogin(){
         if(!this.isLoggedIn()){

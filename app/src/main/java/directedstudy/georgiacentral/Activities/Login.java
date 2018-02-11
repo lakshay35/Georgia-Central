@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import directedstudy.georgiacentral.Session.SessionManager;
 import directedstudy.georgiacentral.Objects.User;
 import directedstudy.georgiacentral.R;
 import directedstudy.georgiacentral.Tables.UserSchema;
@@ -32,6 +33,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         etEmail         = (EditText) findViewById(R.id.etEmail);
         etPassword      = (EditText) findViewById(R.id.etPassword);
@@ -71,9 +73,9 @@ public class Login extends AppCompatActivity {
         if(dbUser != null) {
             Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_LONG).show();
 
-            sessionManager.createLoginSession(dbUser.getFirstName()+dbUser.getLastName(), dbUser.getEmail());
+            sessionManager.createLoginSession(dbUser.getFirstName()+ " " + dbUser.getLastName(), dbUser.getEmail());
 
-            Intent intent = new Intent(this, PostTextbook.class);
+            Intent intent = new Intent(this, Homepage.class);
 
             startActivity(intent);
         } else

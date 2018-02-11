@@ -57,4 +57,9 @@ public class ChangePassword extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
+    public void onClickCancel(View view) {
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
+    }
 }

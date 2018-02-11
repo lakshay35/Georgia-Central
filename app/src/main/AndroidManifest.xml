@@ -20,16 +20,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Activities.Navigator"
-            android:label="@string/title_activity_homepage"
-            android:parentActivityName=".Activities.Login" />
         <activity android:name=".Activities.Registration" />
         <activity android:name=".Activities.ForgotPassword" />
         <activity android:name=".Activities.ChangePassword" />
         <activity android:name=".Activities.PostTextbook" />
-        <activity android:name=".Activities.TextbookSearch"></activity>
-        <activity android:name=".Activities.TextbookProfile"></activity>
+        <activity android:name=".Activities.TextbookSearch" />
+        <activity android:name=".Activities.TextbookProfile" />
+        <activity android:name=".Activities.Homepage" />
+        <activity android:name=".Activities.Profile" />
+        <activity android:name=".Activities.EditProfile"></activity>
     </application>
 
 </manifest>

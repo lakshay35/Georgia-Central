@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -21,6 +20,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import directedstudy.georgiacentral.Session.SessionManager;
 import directedstudy.georgiacentral.Objects.Condition;
 import directedstudy.georgiacentral.Objects.Course;
 import directedstudy.georgiacentral.Objects.TextBookPost;
@@ -50,6 +50,7 @@ public class PostTextbook extends AppCompatActivity implements OnItemSelectedLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_textbook);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         etBookTitle                     = (EditText) findViewById(R.id.etBookTitle);
         etAuthor                        = (EditText) findViewById(R.id.etAuthor);
