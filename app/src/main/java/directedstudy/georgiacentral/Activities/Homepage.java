@@ -32,4 +32,11 @@ public class Homepage extends AppCompatActivity {
         Intent intent = new Intent(this, Profile.class);
         startActivity(intent);
     }
-}
+
+    public void onClickSearch(View view){
+        Intent intent = new Intent(this, TextbookSearch.class);
+        startActivity(intent);
+    }//onClickSearch
+
+}//class
+

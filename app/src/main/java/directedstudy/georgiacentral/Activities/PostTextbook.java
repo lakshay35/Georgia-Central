@@ -109,7 +109,7 @@ public class PostTextbook extends AppCompatActivity implements OnItemSelectedLis
         if(isPosted == true) {
             Toast.makeText(getApplicationContext(), "Post Successful", Toast.LENGTH_LONG).show();
 
-            Intent intent = new Intent(this, TextbookSearch.class);
+            Intent intent = new Intent(this, Homepage.class);
 
             startActivity(intent);
         } else {
