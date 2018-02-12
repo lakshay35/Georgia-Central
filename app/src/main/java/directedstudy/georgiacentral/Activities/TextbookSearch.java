@@ -1,7 +1,9 @@
 package directedstudy.georgiacentral.Activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -27,6 +29,13 @@ public class TextbookSearch extends AppCompatActivity {
 
         loadList();
     }//onCreate
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent myIntent = new Intent(getApplicationContext(), Homepage.class);
+        startActivityForResult(myIntent, 0);
+
+        return true;
+    }//onOptionsItemSelected
 
     public void loadList(){
         ArrayList<TextBookDisplay> textBookList = textBookPostSchema.retrieveTextBookDisplayList();

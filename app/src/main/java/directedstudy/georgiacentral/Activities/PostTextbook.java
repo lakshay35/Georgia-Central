@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -67,6 +68,13 @@ public class PostTextbook extends AppCompatActivity implements OnItemSelectedLis
         spCondition.setOnItemSelectedListener(this);
         loadSpinnerData();
     }//onCreate
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent myIntent = new Intent(getApplicationContext(), Homepage.class);
+        startActivityForResult(myIntent, 0);
+
+        return true;
+    }//onOptionsItemSelected
 
     public void onClickSubmit(View view){
         final ProgressDialog mprogressDialog = new ProgressDialog(this);;

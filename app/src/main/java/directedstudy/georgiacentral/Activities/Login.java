@@ -33,7 +33,6 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         etEmail         = (EditText) findViewById(R.id.etEmail);
         etPassword      = (EditText) findViewById(R.id.etPassword);
