@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -26,6 +29,29 @@ public class TextbookSearch extends AppCompatActivity {
 
         textBookPostSchema  = new TextBookPostSchema(this);
         lvTextBookList      = (ListView) findViewById(R.id.lvTextBookList);
+        final Intent intent = new Intent(this, TextbookProfile.class);
+
+        lvTextBookList.setClickable(true);
+
+        lvTextBookList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextBookDisplay textBookDisplay = (TextBookDisplay)parent.getAdapter().getItem(position);
+                Bundle bundle                   = new Bundle();
+
+                bundle.putString("bookTitle", textBookDisplay.getBookTitle());
+                bundle.putString("author", textBookDisplay.getAuthor());
+                bundle.putString("courseNumber", textBookDisplay.getCourseNumber());
+                bundle.putString("condition", textBookDisplay.getCondition());
+                bundle.putString("price", String.valueOf(textBookDisplay.getPrice()));
+                bundle.putString("name", textBookDisplay.getName());
+                bundle.putString("email", textBookDisplay.getEmail());
+                bundle.putString("phoneNumber", textBookDisplay.getPhoneNumber());
+                bundle.putString("postDate", textBookDisplay.getPostDate());
+
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }//onItemClick
+        });
 
         loadList();
     }//onCreate
