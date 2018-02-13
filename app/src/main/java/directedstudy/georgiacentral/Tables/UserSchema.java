@@ -108,6 +108,26 @@ public class UserSchema extends SQLiteOpenHelper{
     //Tested - Works Great
 
     /**
+     * Returns a boolean indicating if phone number exists with another user
+     * @param email
+     * @param phone
+     * @return
+     */
+    public boolean duplicateData(String email, String phone) {
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_USER + " WHERE " + COLUMN_PHONENUMBER + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[] {phone});
+
+        if(cursor != null && cursor.moveToFirst()) {
+
+            if(!cursor.getString(3).equals(email)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Updates User data in the database
      * @param user
      */

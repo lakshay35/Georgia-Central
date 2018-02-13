@@ -67,15 +67,21 @@ public class EditProfile extends AppCompatActivity {
      * @param view
      */
     public void onClickSave(View view) {
-        user.setFirstName(editFname.getText().toString());
-        user.setLastName(editLname.getText().toString());
-        user.setPhoneNumber(editPhone.getText().toString());
-        userSchema.updateUser(user);
+        if(userSchema.duplicateData(user.getEmail(), editPhone.getText().toString())) {
+            Toast.makeText(getApplicationContext(), "Phone already exists with another user", Toast.LENGTH_LONG).show();
+        } else {
+            user.setFirstName(editFname.getText().toString());
+            user.setLastName(editLname.getText().toString());
+            user.setPhoneNumber(editPhone.getText().toString());
+            userSchema.updateUser(user);
 
-        sessionManager.updateUserInfo(user.getFirstName() + " " + user.getLastName());
-        Toast.makeText(getApplicationContext(), "Updated Profile    ", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this, Profile.class);
-        startActivity(intent);
+            sessionManager.updateUserInfo(user.getFirstName() + " " + user.getLastName());
+            Toast.makeText(getApplicationContext(), "Updated Profile", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, Profile.class);
+            startActivity(intent);
+        }
+
+
     }
 
     /**
