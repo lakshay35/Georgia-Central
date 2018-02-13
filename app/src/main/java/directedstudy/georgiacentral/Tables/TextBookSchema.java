@@ -19,6 +19,9 @@ public class TextBookSchema extends SQLiteOpenHelper {
 
     public TextBookSchema(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        onCreate(db);
     }//TextBookSchema
 
     @Override

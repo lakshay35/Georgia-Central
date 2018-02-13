@@ -27,6 +27,9 @@ public class TextBookPostSchema extends SQLiteOpenHelper{
 
     public TextBookPostSchema(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        onCreate(db);
     }//TextBookPostSchema
 
     @Override
@@ -122,6 +125,7 @@ public class TextBookPostSchema extends SQLiteOpenHelper{
     public ArrayList<TextBookDisplay> retrieveTextBookDisplayList(){ //String bookTitle, String courseNumber){
         ArrayList<TextBookDisplay> textBookDisplayList  = new ArrayList<TextBookDisplay>();
         SQLiteDatabase db                               = getReadableDatabase();
+        onCreate(db);
         String query                                    = "SELECT " +
                 "   p.postID, " +
                 "   u.firstName, " +
