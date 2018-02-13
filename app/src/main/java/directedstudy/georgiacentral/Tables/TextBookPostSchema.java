@@ -80,6 +80,45 @@ public class TextBookPostSchema extends SQLiteOpenHelper{
             return true;
     }//addTextBookPost
 
+    public boolean deleteTextBookPost(int postID){
+        SQLiteDatabase db = getWritableDatabase();
+
+        String query = "DELETE FROM " + TABLE_TEXTBOOKPOST +
+                " WHERE " + COLUMN_POSTID + " = " + postID;
+        try {
+            db.execSQL(query);
+            db.close();
+
+            return true;
+        }catch(Exception e){
+            db.close();
+
+            return false;
+        }//try catch
+    }//deleteTextBookPost
+
+    public boolean updateTextBookPost(TextBookPost textBookPost){
+        SQLiteDatabase db = getWritableDatabase();
+
+        String query = "UPDATE " + TABLE_TEXTBOOKPOST + " SET " +
+                COLUMN_BOOKID + " = '" + textBookPost.getBookID() + "', " +
+                COLUMN_COURSEID + " = '" + textBookPost.getCourseID() + "', " +
+                COLUMN_CONDITIONID + " = '" + textBookPost.getConditionID() + "', " +
+                COLUMN_PRICE + " = '" + textBookPost.getPrice() + "', " +
+                COLUMN_POSTDATE + " = '" + textBookPost.getPostDate()  +
+                "' WHERE " + COLUMN_POSTID + " = '" + textBookPost.getPostID() + "'";
+        try {
+            db.execSQL(query);
+            db.close();
+
+            return true;
+        }catch(Exception e){
+            db.close();
+
+            return false;
+        }//try catch
+    }//updateTextBookPost
+
     public ArrayList<TextBookDisplay> retrieveTextBookDisplayList(){ //String bookTitle, String courseNumber){
         ArrayList<TextBookDisplay> textBookDisplayList  = new ArrayList<TextBookDisplay>();
         SQLiteDatabase db                               = getReadableDatabase();
@@ -105,6 +144,41 @@ public class TextBookPostSchema extends SQLiteOpenHelper{
                 //"       c.courseNumber = ? ";
 
         Cursor c                                        = db.rawQuery(query, null); //, new String [] {bookTitle, courseNumber});
+
+        while (c.moveToNext()) {
+            TextBookDisplay textBookDisplay = new TextBookDisplay(c.getInt(0), c.getString(1) + " " + c.getString(2), c.getString(3), c.getString(4), c.getString(5), c.getString(6), c.getString(7), c.getString(8), c.getFloat(9), c.getString(10));
+
+            textBookDisplayList.add(textBookDisplay);
+        }//while
+
+        c.close();
+
+        return textBookDisplayList;
+    }//retrieveTextBookDisplayList
+
+    public ArrayList<TextBookDisplay> retrieveTextBookDisplayList(String email){ //String bookTitle, String courseNumber){
+        ArrayList<TextBookDisplay> textBookDisplayList  = new ArrayList<TextBookDisplay>();
+        SQLiteDatabase db                               = getReadableDatabase();
+        String query                                    = "SELECT " +
+                "   p.postID, " +
+                "   u.firstName, " +
+                "   u.lastName, " +
+                "   u.email, " +
+                "   u.phoneNumber, " +
+                "   b.bookTitle, " +
+                "   b.author, "  +
+                "   c.courseNumber, " +
+                "   co.condition, " +
+                "   p.price, " +
+                "   p.postDate " +
+                "   FROM TextBookPost p " +
+                "       INNER JOIN User u ON p.userID = u.userID " +
+                "       INNER JOIN Textbook b ON p.bookID = b.bookID " +
+                "       INNER JOIN Course c ON p.courseID = c.courseID " +
+                "       INNER JOIN Condition co ON p.conditionID = co.conditionID " +
+                "       WHERE email = ?";
+
+        Cursor c                                        = db.rawQuery(query, new String [] {email});
 
         while (c.moveToNext()) {
             TextBookDisplay textBookDisplay = new TextBookDisplay(c.getInt(0), c.getString(1) + " " + c.getString(2), c.getString(3), c.getString(4), c.getString(5), c.getString(6), c.getString(7), c.getString(8), c.getFloat(9), c.getString(10));

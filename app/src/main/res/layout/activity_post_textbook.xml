@@ -81,7 +81,9 @@
             android:layout_alignStart="@+id/etCourseNumber"
             android:layout_below="@+id/etAuthor"
             android:layout_marginTop="13dp"
-            android:text="Select PIcture" />
+            android:text="Select PIcture"
+            android:background="@color/colorAccent"
+            android:textColor="@android:color/white"/>
 
         <Button
             android:id="@+id/btnCancel"
@@ -92,7 +94,9 @@
             android:layout_marginEnd="14dp"
             android:layout_toStartOf="@+id/btnSubmit"
             android:onClick="onClickCancel"
-            android:text="Cancel" />
+            android:text="Cancel"
+            android:background="@color/colorAccent"
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/btnSubmit"
@@ -102,6 +106,20 @@
             android:layout_below="@+id/etPrice"
             android:layout_marginTop="56dp"
             android:onClick="onClickSubmit"
-            android:text="Submit Post" />
+            android:text="Submit Post"
+            android:background="@color/colorAccent"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/colorAccent"
+            android:onClick="onClickDelete"
+            android:text="Delete"
+            android:textColor="@android:color/white"
+            android:visibility="invisible" />
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

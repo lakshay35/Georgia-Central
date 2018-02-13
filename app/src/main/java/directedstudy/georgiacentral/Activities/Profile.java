@@ -56,6 +56,11 @@ public class Profile extends AppCompatActivity {
         name.setText(sessionManager.getUserDetails().get(SessionManager.KEY_NAME));
     }
 
+    public void onClickViewPosts(View view){
+        Intent intent = new Intent(this, UserPostList.class);
+        startActivity(intent);
+    }//onClickViewPosts
+
     /**
      * Logs user out
      * @param view

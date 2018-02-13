@@ -1,6 +1,8 @@
 package directedstudy.georgiacentral.Activities;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -35,6 +38,7 @@ import directedstudy.georgiacentral.Tables.UserSchema;
 
 public class PostTextbook extends AppCompatActivity implements OnItemSelectedListener {
 
+    Button btnDelete;
     EditText etBookTitle;
     EditText etAuthor;
     EditText etCourseNumber;
@@ -46,6 +50,7 @@ public class PostTextbook extends AppCompatActivity implements OnItemSelectedLis
     TextBookPostSchema textBookPostSchema;
     SessionManager sessionManager;
     UserSchema userSchema;
+    boolean isPosted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,28 +58,62 @@ public class PostTextbook extends AppCompatActivity implements OnItemSelectedLis
         setContentView(R.layout.activity_post_textbook);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        etBookTitle                     = (EditText) findViewById(R.id.etBookTitle);
-        etAuthor                        = (EditText) findViewById(R.id.etAuthor);
-        etCourseNumber                  = (EditText) findViewById(R.id.etCourseNumber);
-        etPrice                         = (EditText) findViewById(R.id.etPrice);
-        spCondition                     = (Spinner) findViewById(R.id.spCondition);
-        conditionSchema                 = new ConditionSchema(this);
-        textBookSchema                  = new TextBookSchema(this);
-        courseSchema                    = new CourseSchema(this);
-        textBookPostSchema              = new TextBookPostSchema(this);
-        sessionManager                  = new SessionManager(getApplicationContext());
-        userSchema                      = new UserSchema(this);
+        btnDelete           = (Button) findViewById(R.id.btnDelete);
+        etBookTitle         = (EditText) findViewById(R.id.etBookTitle);
+        etAuthor            = (EditText) findViewById(R.id.etAuthor);
+        etCourseNumber      = (EditText) findViewById(R.id.etCourseNumber);
+        etPrice             = (EditText) findViewById(R.id.etPrice);
+        spCondition         = (Spinner) findViewById(R.id.spCondition);
+        conditionSchema     = new ConditionSchema(this);
+        textBookSchema      = new TextBookSchema(this);
+        courseSchema        = new CourseSchema(this);
+        textBookPostSchema  = new TextBookPostSchema(this);
+        sessionManager      = new SessionManager(getApplicationContext());
+        userSchema          = new UserSchema(this);
 
         spCondition.setOnItemSelectedListener(this);
         loadSpinnerData();
+
+        if(getIntent().hasExtra("bookTitle")){
+            Bundle bundle = getIntent().getExtras();
+
+            btnDelete.setVisibility(View.VISIBLE);
+            etBookTitle.setText(bundle.getString("bookTitle"));
+            etAuthor.setText(bundle.getString("author"));
+            etCourseNumber.setText(bundle.getString("courseNumber"));
+            etPrice.setText(bundle.getString("price"));
+            spCondition.setSelection(conditionSchema.retrieveCondition(bundle.getString("condition")).getConditionID());
+        }//if
     }//onCreate
 
     public boolean onOptionsItemSelected(MenuItem item){
-        Intent myIntent = new Intent(getApplicationContext(), Homepage.class);
-        startActivityForResult(myIntent, 0);
+        super.onBackPressed();
 
         return true;
     }//onOptionsItemSelected
+
+    public void onClickDelete(View view){
+        new AlertDialog.Builder(this)
+            .setTitle("Delete Post?")
+            .setMessage("Are you sure you want to Delete?")
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    boolean isDeleted = textBookPostSchema.deleteTextBookPost(Integer.parseInt(getIntent().getExtras().getString("postID")));
+
+                    if(isDeleted == true) {
+                        Toast.makeText(getApplicationContext(), "Post Deleted", Toast.LENGTH_LONG).show();
+
+                        Intent intent = new Intent(PostTextbook.this, UserPostList.class);
+
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Cannot Delete", Toast.LENGTH_LONG).show();
+                    }//if else
+                }})
+            .setNegativeButton(android.R.string.no, null).show();
+    }//onClickDelete
 
     public void onClickSubmit(View view){
         final ProgressDialog mprogressDialog = new ProgressDialog(this);;
@@ -112,21 +151,29 @@ public class PostTextbook extends AppCompatActivity implements OnItemSelectedLis
         date                            = today.getTime();
         String expireDate               = df.format(date);
         TextBookPost textBookPost       = new TextBookPost(userID, textBookID, courseID, conditionID, etPrice.getText().toString(), expireDate, postDate);
-        boolean isPosted                = textBookPostSchema.addTextBookPost(textBookPost);
+
+        if(getIntent().hasExtra("bookTitle")) {
+            textBookPost       = new TextBookPost(Integer.parseInt(getIntent().getExtras().getString("postID")),userID, textBookID, courseID, conditionID, etPrice.getText().toString(), expireDate, postDate);
+            isPosted           = textBookPostSchema.updateTextBookPost(textBookPost);
+        }else {
+            isPosted = textBookPostSchema.addTextBookPost(textBookPost);
+        }//if else
 
         if(isPosted == true) {
-            Toast.makeText(getApplicationContext(), "Post Successful", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Sucess", Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(this, Homepage.class);
 
             startActivity(intent);
         } else {
-            Toast.makeText(getApplicationContext(), "Post Error", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
         }//if else
     }//onClickSubmit
 
     public void onClickCancel(View view){
+        Intent intent = new Intent(this, Homepage.class);
 
+        startActivity(intent);
     }//onClickCancel
 
     private void loadSpinnerData() {

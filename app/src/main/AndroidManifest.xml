@@ -28,7 +28,8 @@
         <activity android:name=".Activities.TextbookProfile" />
         <activity android:name=".Activities.Homepage" />
         <activity android:name=".Activities.Profile" />
-        <activity android:name=".Activities.EditProfile"></activity>
+        <activity android:name=".Activities.EditProfile" />
+        <activity android:name=".Activities.UserPostList"></activity>
     </application>
 
 </manifest>
