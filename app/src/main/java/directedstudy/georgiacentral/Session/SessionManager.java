@@ -39,6 +39,7 @@ public class SessionManager {
      */
     public void updateUserInfo(String name) {
         editor.putString(KEY_NAME, name);
+        editor.commit();
     }
 
     public void checkLogin(){
