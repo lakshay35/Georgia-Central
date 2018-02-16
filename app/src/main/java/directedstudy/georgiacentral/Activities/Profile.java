@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import directedstudy.georgiacentral.Objects.User;
 import directedstudy.georgiacentral.Session.SessionManager;
 import directedstudy.georgiacentral.R;
 import directedstudy.georgiacentral.Tables.UserSchema;
@@ -17,6 +18,8 @@ public class Profile extends AppCompatActivity {
     ImageView profilePicture;
     Button logoutButton;
     TextView name;
+    TextView phone;
+    TextView email;
     SessionManager sessionManager;
     UserSchema userSchema;
 
@@ -33,6 +36,8 @@ public class Profile extends AppCompatActivity {
         profilePicture = findViewById(R.id.profilePicture);
         logoutButton = findViewById(R.id.logoutButton);
         name = findViewById(R.id.name);
+        phone = findViewById(R.id.phone);
+        email = findViewById(R.id.email);
 
         userSchema = new UserSchema(this);
 
@@ -45,7 +50,10 @@ public class Profile extends AppCompatActivity {
      * Populates Profile Page with user's details
      */
     private void populateProfilePage() {
-        name.setText(sessionManager.getUserDetails().get(SessionManager.KEY_NAME));
+        User user = userSchema.retrieveUser(sessionManager.getUserDetails().get(SessionManager.KEY_EMAIL));
+        name.setText(user.getFirstName() + " " + user.getLastName());
+        phone.setText(user.getPhoneNumber());
+        email.setText(user.getEmail());
     }
 
     /**
