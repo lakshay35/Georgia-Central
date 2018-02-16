@@ -3,6 +3,7 @@ package directedstudy.georgiacentral.Activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -46,6 +47,13 @@ public class Profile extends AppCompatActivity {
         populateProfilePage();
     }
 
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent myIntent = new Intent(getApplicationContext(), Homepage.class);
+        startActivityForResult(myIntent, 0);
+
+        return true;
+    }//onOptionsItemSelected
+
     /**
      * Populates Profile Page with user's details
      */
@@ -55,6 +63,11 @@ public class Profile extends AppCompatActivity {
         phone.setText(user.getPhoneNumber());
         email.setText(user.getEmail());
     }
+
+    public void onClickViewPosts(View view){
+        Intent intent = new Intent(this, UserPostList.class);
+        startActivity(intent);
+    }//onClickViewPosts
 
     /**
      * Logs user out

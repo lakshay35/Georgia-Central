@@ -40,7 +40,7 @@ public class ForgotPassword extends AppCompatActivity {
      */
     public void onSubmitClick(View view) {
         UserSchema userSchema = new UserSchema(this);
-        User user = userSchema.retrieveUser(new User(etEmail.getText().toString()));
+        User user = userSchema.retrieveUser(new User(etEmail.getText().toString().trim()));
         final String password = getTempPassword();
         user.setPassword(password);
         userSchema.updateUser(user);

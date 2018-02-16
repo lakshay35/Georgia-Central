@@ -21,6 +21,9 @@ public class ConditionSchema extends SQLiteOpenHelper {
 
     public ConditionSchema(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        onCreate(db);
     }//ConditionSchema
 
     @Override

@@ -3,6 +3,7 @@ package directedstudy.georgiacentral.Activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +32,7 @@ public class EditProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         editFname = findViewById(R.id.editFname);
         editLname = findViewById(R.id.editLname);
@@ -43,6 +45,13 @@ public class EditProfile extends AppCompatActivity {
 
         populateData();
     }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent myIntent = new Intent(getApplicationContext(), Profile.class);
+        startActivityForResult(myIntent, 0);
+
+        return true;
+    }//onOptionsItemSelected
 
     /**
      * Populates the view with user data

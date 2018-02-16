@@ -6,7 +6,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -28,7 +28,8 @@
         <activity android:name=".Activities.TextbookProfile" />
         <activity android:name=".Activities.Homepage" />
         <activity android:name=".Activities.Profile" />
-        <activity android:name=".Activities.EditProfile"></activity>
+        <activity android:name=".Activities.EditProfile" />
+        <activity android:name=".Activities.UserPostList"></activity>
     </application>
 
 </manifest>

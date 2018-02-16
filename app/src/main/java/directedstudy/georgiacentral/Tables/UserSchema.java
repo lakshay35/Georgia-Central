@@ -26,6 +26,9 @@ public class UserSchema extends SQLiteOpenHelper{
      */
     public UserSchema(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        onCreate(db);
     }//UserSchema
 
     /**
@@ -34,7 +37,7 @@ public class UserSchema extends SQLiteOpenHelper{
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query = "CREATE TABLE " + TABLE_USER + "(" +
+        String query = "CREATE TABLE IF NOT EXISTS " + TABLE_USER + "(" +
                 COLUMN_USERID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_FIRSTNAME + " TEXT NOT NULL, " +
                 COLUMN_LASTNAME + " TEXT NOT NULL, " +

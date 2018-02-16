@@ -40,17 +40,17 @@ public class ChangePassword extends AppCompatActivity {
      * @param view
      */
     public void onClickSubmit(View view) {
-        if(etOldPass.getText().toString().equals(etNewPass.getText().toString())) {
+        if(etOldPass.getText().toString().trim().equals(etNewPass.getText().toString().trim())) {
             Toast.makeText(getApplicationContext(), "Please enter a password different from your current one", Toast.LENGTH_LONG).show();
         } else {
             final ProgressDialog progressDialog = new ProgressDialog(ChangePassword.this);
             progressDialog.setTitle("Changing Your Password..");
             progressDialog.setMessage("Please wait");
             progressDialog.show();
-            User user = new User(etEmail.getText().toString());
+            User user = new User(etEmail.getText().toString().trim());
             UserSchema userSchema = new UserSchema(this);
             user = userSchema.retrieveUser(user);
-            user.setPassword(etNewPass.getText().toString());
+            user.setPassword(etNewPass.getText().toString().trim());
             userSchema.updateUser(user);
             Toast.makeText(getApplicationContext(), "Updated Password", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, Login.class);
