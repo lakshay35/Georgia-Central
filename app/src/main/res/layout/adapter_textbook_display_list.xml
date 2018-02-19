@@ -35,7 +35,14 @@
             android:id="@+id/tvCourseNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
+            android:text="TextView"
+            tools:layout_editor_absoluteX="25dp"
+            tools:layout_editor_absoluteY="48dp" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="TextView"
             tools:layout_editor_absoluteX="25dp"
             tools:layout_editor_absoluteY="48dp" />
@@ -44,7 +51,6 @@
             android:id="@+id/tvCondition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="5dp"
             android:text="TextView"
             tools:layout_editor_absoluteX="107dp"
             tools:layout_editor_absoluteY="48dp" />
@@ -53,7 +59,6 @@
             android:id="@+id/tvPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="5dp"
             android:text="TextView"
             tools:layout_editor_absoluteX="25dp"
             tools:layout_editor_absoluteY="82dp" />
