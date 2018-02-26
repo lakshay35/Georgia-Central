@@ -122,11 +122,12 @@ public class TextBookPostSchema extends SQLiteOpenHelper{
         }//try catch
     }//updateTextBookPost
 
-    public ArrayList<TextBookDisplay> retrieveTextBookDisplayList(){ //String bookTitle, String courseNumber){
+    public ArrayList<TextBookDisplay> retrieveTextBookDisplayList(){
         ArrayList<TextBookDisplay> textBookDisplayList  = new ArrayList<TextBookDisplay>();
         SQLiteDatabase db                               = getReadableDatabase();
         onCreate(db);
-        String query                                    = "SELECT " +
+        String query                                    =
+                "SELECT " +
                 "   p.postID, " +
                 "   u.firstName, " +
                 "   u.lastName, " +
@@ -142,12 +143,10 @@ public class TextBookPostSchema extends SQLiteOpenHelper{
                 "       INNER JOIN User u ON p.userID = u.userID " +
                 "       INNER JOIN Textbook b ON p.bookID = b.bookID " +
                 "       INNER JOIN Course c ON p.courseID = c.courseID " +
-                "       INNER JOIN Condition co ON p.conditionID = co.conditionID ";
-                //"   WHERE " +
-                //"       b.bookTitle = ? OR " +
-                //"       c.courseNumber = ? ";
+                "       INNER JOIN Condition co ON p.conditionID = co.conditionID " +
+                "   ORDER BY b.bookTitle ";
 
-        Cursor c                                        = db.rawQuery(query, null); //, new String [] {bookTitle, courseNumber});
+        Cursor c                                        = db.rawQuery(query, null);
 
         while (c.moveToNext()) {
             TextBookDisplay textBookDisplay = new TextBookDisplay(c.getInt(0), c.getString(1) + " " + c.getString(2), c.getString(3), c.getString(4), c.getString(5), c.getString(6), c.getString(7), c.getString(8), c.getFloat(9), c.getString(10));
@@ -160,7 +159,7 @@ public class TextBookPostSchema extends SQLiteOpenHelper{
         return textBookDisplayList;
     }//retrieveTextBookDisplayList
 
-    public ArrayList<TextBookDisplay> retrieveTextBookDisplayList(String email){ //String bookTitle, String courseNumber){
+    public ArrayList<TextBookDisplay> retrieveTextBookDisplayList(String email){
         ArrayList<TextBookDisplay> textBookDisplayList  = new ArrayList<TextBookDisplay>();
         SQLiteDatabase db                               = getReadableDatabase();
         String query                                    = "SELECT " +

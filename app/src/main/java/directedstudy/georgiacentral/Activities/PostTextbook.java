@@ -82,7 +82,7 @@ public class PostTextbook extends AppCompatActivity implements OnItemSelectedLis
             etAuthor.setText(bundle.getString("author"));
             etCourseNumber.setText(bundle.getString("courseNumber"));
             etPrice.setText(bundle.getString("price"));
-            spCondition.setSelection(conditionSchema.retrieveCondition(bundle.getString("condition")).getConditionID());
+            spCondition.setSelection(conditionSchema.retrieveCondition(bundle.getString("condition")).getConditionID()-1);
         }//if
     }//onCreate
 
@@ -160,7 +160,7 @@ public class PostTextbook extends AppCompatActivity implements OnItemSelectedLis
         }//if else
 
         if(isPosted == true) {
-            Toast.makeText(getApplicationContext(), "Sucess", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(this, Homepage.class);
 
