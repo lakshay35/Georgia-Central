@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import java.util.ArrayList;
 
 import directedstudy.georgiacentral.Objects.Textbook;
 import directedstudy.georgiacentral.Objects.User;
@@ -40,6 +43,11 @@ public class TextBookSchema extends SQLiteOpenHelper {
         onCreate(db);
     }//onUpgrade
 
+    /**
+     * Adds a textbook
+     * @param textBook
+     * @return
+     */
     public boolean addTextBook(Textbook textBook){
         ContentValues values = new ContentValues();
 
@@ -57,6 +65,11 @@ public class TextBookSchema extends SQLiteOpenHelper {
             return true;
     }//addTextBook
 
+    /**
+     * Retrieves a certain textbook
+     * @param textbook
+     * @return
+     */
     public Textbook retrieveTextBook(Textbook textbook){
         SQLiteDatabase db               = getReadableDatabase();
 
@@ -75,5 +88,28 @@ public class TextBookSchema extends SQLiteOpenHelper {
 
         return null;
     }//retrieveTextBook
+
+    /**
+     * Returns a list of all the textbooks
+     * @return
+     */
+    public ArrayList<Textbook> retrieveAllTextbooks() {
+        ArrayList<Textbook> textbooks = new ArrayList<Textbook>();
+        SQLiteDatabase db             = getReadableDatabase();
+
+        onCreate(db);
+
+        String query                  = "SELECT * FROM " + TABLE_TEXTBOOK;
+        Cursor cursor                 = db.rawQuery(query, null);
+
+        while(cursor.moveToNext()){
+            Textbook textbook = new Textbook(Integer.parseInt(cursor.getString(0)), cursor.getString(1), cursor.getString(2));
+            textbooks.add(textbook);
+        }//if
+
+        cursor.close();
+
+        return textbooks;
+    }
 
 }//class

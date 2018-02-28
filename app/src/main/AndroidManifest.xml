@@ -29,7 +29,9 @@
         <activity android:name=".Activities.Homepage" />
         <activity android:name=".Activities.Profile" />
         <activity android:name=".Activities.EditProfile" />
-        <activity android:name=".Activities.UserPostList"></activity>
+        <activity android:name=".Activities.UserPostList" />
+        <activity android:name=".Activities.Notifications"></activity>
+
     </application>
 
 </manifest>
