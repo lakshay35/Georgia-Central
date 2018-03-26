@@ -122,7 +122,7 @@ public class TextBookPostSchema extends SQLiteOpenHelper{
         }//try catch
     }//updateTextBookPost
 
-    public ArrayList<TextBookDisplay> retrieveTextBookDisplayList(){
+    public ArrayList<TextBookDisplay> retrieveTextBookDisplayList(String email, String name){
         ArrayList<TextBookDisplay> textBookDisplayList  = new ArrayList<TextBookDisplay>();
         SQLiteDatabase db                               = getReadableDatabase();
         onCreate(db);
@@ -144,9 +144,10 @@ public class TextBookPostSchema extends SQLiteOpenHelper{
                 "       INNER JOIN Textbook b ON p.bookID = b.bookID " +
                 "       INNER JOIN Course c ON p.courseID = c.courseID " +
                 "       INNER JOIN Condition co ON p.conditionID = co.conditionID " +
+                "   WHERE email <> ?" +
                 "   ORDER BY b.bookTitle ";
 
-        Cursor c                                        = db.rawQuery(query, null);
+        Cursor c                                        = db.rawQuery(query, new String [] {email});
 
         while (c.moveToNext()) {
             TextBookDisplay textBookDisplay = new TextBookDisplay(c.getInt(0), c.getString(1) + " " + c.getString(2), c.getString(3), c.getString(4), c.getString(5), c.getString(6), c.getString(7), c.getString(8), c.getFloat(9), c.getString(10));

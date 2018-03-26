@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -71,21 +72,25 @@ public class Registration extends AppCompatActivity {
 
         User user = new User(etFirstName.getText().toString().trim(), etLastName.getText().toString().trim(), etEmail.getText().toString().trim(), etPassword.getText().toString().trim(), etPhoneNumber.getText().toString().trim());
 
-        if(etEmail.getText().toString().toLowerCase().indexOf("@uga.edu") == -1) {
-            Toast.makeText(getApplicationContext(), "UGA Email Required", Toast.LENGTH_LONG).show();
-        }else{
-            boolean isRegistered = userSchema.addUser(user);
-
-            if(isRegistered == true) {
-                Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_LONG).show();
-
-                sendConfirmationEmail(); // Send email
-
-                Intent intent = new Intent(this, Login.class);
-
-                startActivity(intent);
+        if(TextUtils.isEmpty(etFirstName.getText()) || TextUtils.isEmpty(etLastName.getText()) || TextUtils.isEmpty(etEmail.getText()) || TextUtils.isEmpty(etPassword.getText()) || TextUtils.isEmpty(etPhoneNumber.getText()))
+            Toast.makeText(getApplicationContext(), "Please complete all fields", Toast.LENGTH_SHORT).show();
+        else {
+            if (etEmail.getText().toString().toLowerCase().indexOf("@uga.edu") == -1) {
+                Toast.makeText(getApplicationContext(), "UGA Email Required", Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(getApplicationContext(), "Registration Error", Toast.LENGTH_LONG).show();
+                boolean isRegistered = userSchema.addUser(user);
+
+                if (isRegistered == true) {
+                    Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_LONG).show();
+
+                    sendConfirmationEmail(); // Send email
+
+                    Intent intent = new Intent(this, Login.class);
+
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Registration Error", Toast.LENGTH_LONG).show();
+                }//if else
             }//if else
         }//if else
     }//onClickSubmit

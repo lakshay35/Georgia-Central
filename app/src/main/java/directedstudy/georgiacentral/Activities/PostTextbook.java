@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -151,22 +152,25 @@ public class PostTextbook extends AppCompatActivity implements OnItemSelectedLis
         date                            = today.getTime();
         String expireDate               = df.format(date);
         TextBookPost textBookPost       = new TextBookPost(userID, textBookID, courseID, conditionID, etPrice.getText().toString(), expireDate, postDate);
+        if(TextUtils.isEmpty(etBookTitle.getText()) || TextUtils.isEmpty(etAuthor.getText()) || TextUtils.isEmpty(etCourseNumber.getText()) || TextUtils.isEmpty(etPrice.getText()))
+            Toast.makeText(getApplicationContext(), "Please complete all fields", Toast.LENGTH_SHORT).show();
+        else {
+            if (getIntent().hasExtra("bookTitle")) {
+                textBookPost = new TextBookPost(Integer.parseInt(getIntent().getExtras().getString("postID")), userID, textBookID, courseID, conditionID, etPrice.getText().toString(), expireDate, postDate);
+                isPosted = textBookPostSchema.updateTextBookPost(textBookPost);
+            } else {
+                isPosted = textBookPostSchema.addTextBookPost(textBookPost);
+            }//if else
 
-        if(getIntent().hasExtra("bookTitle")) {
-            textBookPost       = new TextBookPost(Integer.parseInt(getIntent().getExtras().getString("postID")),userID, textBookID, courseID, conditionID, etPrice.getText().toString(), expireDate, postDate);
-            isPosted           = textBookPostSchema.updateTextBookPost(textBookPost);
-        }else {
-            isPosted = textBookPostSchema.addTextBookPost(textBookPost);
-        }//if else
+            if (isPosted == true) {
+                Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
 
-        if(isPosted == true) {
-            Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(this, Homepage.class);
 
-            Intent intent = new Intent(this, Homepage.class);
-
-            startActivity(intent);
-        } else {
-            Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+                startActivity(intent);
+            } else {
+                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+            }//if else
         }//if else
     }//onClickSubmit
 

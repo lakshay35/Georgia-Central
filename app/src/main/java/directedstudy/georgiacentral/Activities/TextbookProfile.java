@@ -1,12 +1,18 @@
 package directedstudy.georgiacentral.Activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
+import directedstudy.georgiacentral.Email.EmailUtility;
 import directedstudy.georgiacentral.R;
+import directedstudy.georgiacentral.Session.SessionManager;
 
 public class TextbookProfile extends AppCompatActivity {
 
@@ -19,6 +25,7 @@ public class TextbookProfile extends AppCompatActivity {
     TextView tvEmail;
     TextView tvPhoneNumber;
     TextView tvPostDate;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +34,7 @@ public class TextbookProfile extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Bundle bundle           = getIntent().getExtras();
+        sessionManager          = new SessionManager(getApplicationContext());
         tvBookTitle             = (TextView) findViewById(R.id.tvBookTitle);
         tvAuthor                = (TextView) findViewById(R.id.tvAuthor);
         tvCourseNumber          = (TextView) findViewById(R.id.tvCourseNumber);
@@ -47,6 +55,33 @@ public class TextbookProfile extends AppCompatActivity {
         tvPhoneNumber.setText(bundle.getString("phoneNumber"));
         tvPostDate.setText("Posted On: " + bundle.getString("postDate"));
     }//onCreate
+
+    public void onClickSendEmail(View view){
+        final ProgressDialog progressDialog = new ProgressDialog(TextbookProfile.this);
+        progressDialog.setTitle("Sending Email...");
+        progressDialog.setMessage("Please wait");
+        progressDialog.show();
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    EmailUtility email = new EmailUtility();
+                    email.sendMail("Purchase Request",
+                            sessionManager.getUserDetails().get(SessionManager.KEY_NAME) + " ("+ sessionManager.getUserDetails().get(SessionManager.KEY_EMAIL) + ") has requested to purchase \"" + tvBookTitle.getText() + "\"." +
+                                    "\n\n\n Thank You, \n Georgia Central Team",
+                            "GeorgiaCentral",
+                            tvEmail.getText().toString());
+                    progressDialog.dismiss();
+                } catch (Exception e) {
+                    Log.e("mylog", "Error: " + e.getMessage());
+                }
+            }
+        });
+        thread.start();
+
+        tvEmail.setClickable(false);
+        tvEmail.setTextColor(Color.GRAY);
+    }//onClickSendEmail
 
     public boolean onOptionsItemSelected(MenuItem item){
         Intent myIntent = new Intent(getApplicationContext(), TextbookSearch.class);
