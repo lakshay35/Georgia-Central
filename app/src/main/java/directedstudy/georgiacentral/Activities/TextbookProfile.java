@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import directedstudy.georgiacentral.Email.EmailUtility;
 import directedstudy.georgiacentral.R;
@@ -79,6 +80,7 @@ public class TextbookProfile extends AppCompatActivity {
         });
         thread.start();
 
+        Toast.makeText(getApplicationContext(), "Request Sent", Toast.LENGTH_LONG).show();
         tvEmail.setClickable(false);
         tvEmail.setTextColor(Color.GRAY);
     }//onClickSendEmail
