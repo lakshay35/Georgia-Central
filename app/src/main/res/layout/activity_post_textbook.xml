@@ -75,17 +75,6 @@
             android:layout_marginTop="21dp" />
 
         <Button
-            android:id="@+id/btnPicture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/etCourseNumber"
-            android:layout_below="@+id/etAuthor"
-            android:layout_marginTop="13dp"
-            android:text="Select PIcture"
-            android:background="@color/colorAccent"
-            android:textColor="@android:color/white"/>
-
-        <Button
             android:id="@+id/btnCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

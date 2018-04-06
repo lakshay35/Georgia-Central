@@ -21,8 +21,8 @@
             <ImageView
                 android:id="@+id/profilePicture"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/lakshay" />
+                android:layout_height="86dp"
+                app:srcCompat="@drawable/profile" />
         </LinearLayout>
 
         <LinearLayout

@@ -23,6 +23,7 @@ import java.util.List;
 
 import directedstudy.georgiacentral.Objects.TextBookDisplay;
 import directedstudy.georgiacentral.R;
+import directedstudy.georgiacentral.Session.SessionManager;
 import directedstudy.georgiacentral.Tables.TextBookPostSchema;
 
 public class TextbookSearch extends AppCompatActivity {
@@ -35,6 +36,7 @@ public class TextbookSearch extends AppCompatActivity {
     ArrayList<TextBookDisplay> result;
     Spinner spOrder;
     TextView tvSort;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +44,9 @@ public class TextbookSearch extends AppCompatActivity {
         setContentView(R.layout.activity_textbook_search);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        sessionManager      = new SessionManager(getApplicationContext());
         tvEmpty             = (TextView) findViewById(R.id.tvEmpty);
-        tvSort             = (TextView) findViewById(R.id.tvSort);
+        tvSort              = (TextView) findViewById(R.id.tvSort);
         textBookPostSchema  = new TextBookPostSchema(this);
         lvTextBookList      = (ListView) findViewById(R.id.lvTextBookList);
         spOrder             = (Spinner)findViewById(R.id.spOrder);
@@ -128,7 +131,7 @@ public class TextbookSearch extends AppCompatActivity {
     }//onOptionsItemSelected
 
     public void loadList(){
-        textBookList                            = textBookPostSchema.retrieveTextBookDisplayList();
+        textBookList                            = textBookPostSchema.retrieveTextBookDisplayList(sessionManager.getUserDetails().get(SessionManager.KEY_EMAIL), sessionManager.getUserDetails().get(SessionManager.KEY_NAME));
         la                                      = new TextBookDisplayAdapter(this, R.layout.adapter_textbook_display_list, textBookList);
 
         if(textBookList.size() <= 0)
