@@ -40,6 +40,7 @@
             android:layout_below="@+id/tvBookTitle"
             android:layout_marginEnd="12dp"
             android:layout_marginTop="11dp"
+            android:background="@color/colorAccent"
             android:text="TextView"
             android:textAlignment="center"
             android:textSize="18sp" />
@@ -62,6 +63,7 @@
             android:layout_alignStart="@+id/tvCourseNumber"
             android:layout_below="@+id/tvCourseNumber"
             android:layout_marginTop="11dp"
+            android:background="@color/colorAccent"
             android:text="TextView"
             android:textAlignment="center"
             android:textSize="18sp" />
@@ -84,6 +86,7 @@
             android:layout_below="@+id/tvPrice"
             android:layout_marginTop="50dp"
             android:layout_toStartOf="@+id/tvAuthor"
+            android:background="@color/colorAccent"
             android:text="TextView"
             android:textAlignment="center"
             android:textSize="18sp" />
@@ -109,6 +112,7 @@
             android:layout_alignStart="@+id/tvEmail"
             android:layout_below="@+id/tvEmail"
             android:layout_marginTop="15dp"
+            android:background="@color/colorAccent"
             android:text="TextView"
             android:textAlignment="center"
             android:textSize="18sp" />

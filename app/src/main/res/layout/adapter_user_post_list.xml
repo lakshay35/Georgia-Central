@@ -7,14 +7,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:background="@color/colorAccent"
         android:orientation="vertical"
-        android:layout_margin="10dp">
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="10dp">
 
         <TextView
             android:id="@+id/tvBookTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
             android:text="TextView"
+            android:textColor="@android:color/white"
             android:textSize="20dp"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="107dp"
@@ -24,7 +29,9 @@
             android:id="@+id/tvAuthor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
             android:text="TextView"
+            android:textColor="@android:color/white"
             android:textSize="15dp"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="25dp"
@@ -34,8 +41,10 @@
             android:id="@+id/tvCourseNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
             android:paddingTop="10dp"
             android:text="TextView"
+            android:textColor="@android:color/white"
             tools:layout_editor_absoluteX="25dp"
             tools:layout_editor_absoluteY="48dp" />
 
@@ -43,8 +52,10 @@
             android:id="@+id/tvCondition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
             android:paddingTop="5dp"
             android:text="TextView"
+            android:textColor="@android:color/white"
             tools:layout_editor_absoluteX="107dp"
             tools:layout_editor_absoluteY="48dp" />
 
@@ -54,8 +65,10 @@
             android:layout_height="wrap_content"
             android:paddingTop="5dp"
             android:text="TextView"
+            android:textColor="@android:color/white"
             tools:layout_editor_absoluteX="25dp"
-            tools:layout_editor_absoluteY="82dp" />
+            tools:layout_editor_absoluteY="82dp"
+            android:paddingLeft="5dp" />
 
         <View
             android:layout_width="fill_parent"
