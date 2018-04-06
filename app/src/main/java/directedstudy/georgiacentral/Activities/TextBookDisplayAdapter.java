@@ -15,6 +15,8 @@ import directedstudy.georgiacentral.Objects.TextBookDisplay;
 import directedstudy.georgiacentral.R;
 import directedstudy.georgiacentral.Tables.TextBookPostSchema;
 
+import static directedstudy.georgiacentral.R.color.colorAccent;
+
 class TextBookDisplayAdapter extends ArrayAdapter<TextBookDisplay> implements Filterable {
 
     private ArrayList<TextBookDisplay> textBookDisplayList;
@@ -48,6 +50,9 @@ class TextBookDisplayAdapter extends ArrayAdapter<TextBookDisplay> implements Fi
         tvCondition.setText("Condition: " + textBookDisplayItem.getCondition());
         tvPrice.setText("$" + price);
 
+        if(position % 2 == 0) {
+            convertView.setBackgroundColor(colorAccent);
+        }
         return convertView;
     }//getView
 
