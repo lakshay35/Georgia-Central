@@ -19,6 +19,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -82,7 +84,14 @@ public class PostTextbook extends AppCompatActivity implements OnItemSelectedLis
             etBookTitle.setText(bundle.getString("bookTitle"));
             etAuthor.setText(bundle.getString("author"));
             etCourseNumber.setText(bundle.getString("courseNumber"));
-            etPrice.setText(bundle.getString("price"));
+            DecimalFormat df = new DecimalFormat("#.00");
+            NumberFormat nf = NumberFormat.getInstance();
+            try {
+                etPrice.setText(df.format(nf.parse(bundle.getString("price")).doubleValue()));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             spCondition.setSelection(conditionSchema.retrieveCondition(bundle.getString("condition")).getConditionID()-1);
         }//if
     }//onCreate

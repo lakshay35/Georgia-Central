@@ -38,7 +38,6 @@
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/tvBookTitle"
             android:layout_below="@+id/tvBookTitle"
-            android:layout_marginEnd="12dp"
             android:layout_marginTop="11dp"
             android:background="@color/colorAccent"
             android:text="TextView"

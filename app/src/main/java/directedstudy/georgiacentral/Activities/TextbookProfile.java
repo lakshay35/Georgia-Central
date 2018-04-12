@@ -1,5 +1,6 @@
 package directedstudy.georgiacentral.Activities;
 
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,6 +11,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 import directedstudy.georgiacentral.Email.EmailUtility;
 import directedstudy.georgiacentral.R;
@@ -50,7 +54,13 @@ public class TextbookProfile extends AppCompatActivity {
         tvAuthor.setText("Author: " + bundle.getString("author"));
         tvCourseNumber.setText("Course: " + bundle.getString("courseNumber"));
         tvCondition.setText("Condition: " +bundle.getString("condition"));
-        tvPrice.setText("$" + bundle.getString("price"));
+        DecimalFormat df = new DecimalFormat("#.00");
+        NumberFormat nf = NumberFormat.getInstance();
+        try {
+            tvPrice.setText("$" + df.format(nf.parse(bundle.getString("price")).doubleValue()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         tvName.setText("Posted By: " + bundle.getString("name"));
         tvEmail.setText(bundle.getString("email"));
         tvPhoneNumber.setText(bundle.getString("phoneNumber"));
